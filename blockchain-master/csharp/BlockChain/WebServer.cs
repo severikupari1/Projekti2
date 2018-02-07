@@ -61,6 +61,10 @@ namespace BlockChainDemo
                         //GET: http://localhost:12345/nodes/resolve
                         case "/nodes/resolve":
                             return chain.Consensus();
+
+                        //case "/testi":
+                            //return string.Format("<HTML><BODY>TESTI sivu<br></BODY></HTML>");
+                            //break;
                     }
 
                     return "";
@@ -69,7 +73,8 @@ namespace BlockChainDemo
                 $"http://{host}:{port}/transactions/new/",
                 $"http://{host}:{port}/chain/",
                 $"http://{host}:{port}/nodes/register/",
-                $"http://{host}:{port}/nodes/resolve/"
+                $"http://{host}:{port}/nodes/resolve/",
+                $"http://{host}:{port}/testi/" //Added by Severi
             );
 
             server.Run();

@@ -10,3 +10,15 @@ C:\Users\s704383\Downloads\blockchain-master\blockchain-master\csharp\BlockChain
 C:\Users\s704383\Downloads\blockchain-master\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.CoreCompileInputs.cache
 C:\Users\s704383\Downloads\blockchain-master\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.exe
 C:\Users\s704383\Downloads\blockchain-master\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.pdb
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe.config
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.pdb
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\TinyWebServer.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\Newtonsoft.Json.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.pdb
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\Newtonsoft.Json.xml
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csprojResolveAssemblyReference.cache
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.CoreCompileInputs.cache
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.exe
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.pdb
