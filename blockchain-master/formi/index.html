@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-<body>
+<body onload="">
     <form id="myForm" >
 
         Maara: <input type="text" name="Amount" id="maara" value=""><br>
@@ -30,23 +30,42 @@
 function nappi(){
 // var formData = JSON.stringify($("#myForm").serializeArray());
 //         console.log(formData);
+
+
  var maara = document.getElementById("maara").value;
  var saaja = document.getElementById("saaja").value;
  var laite1 = document.getElementById("lahettaja").value;
-var stringi = maara + saaja + laite1;
+// var stringi = maara + saaja + laite1;
 
-document.getElementById("tuloste").innerHTML = stringi;
+
+var oikea = {
+    "Amount":Number(maara),
+    "Recipient":saaja,
+    "Sender":laite1
+};
+
+console.log(oikea);
+var jsonstring = JSON.stringify(oikea);
+console.log(jsonstring);
+
 
         $.ajax({
   type: "POST",
-  url: "http://localhost:12345/transactions/new",
-  data: formData,
+  url: "http://10.211.48.51:12345/transactions/new",
+  data: jsonstring,
   success: function(){},
   dataType: "json",
   contentType : "application/json"
 });
 
     }
+
+    
+
+
+    function testi(){
+    console.log(oikea);
+}
 
     
 
