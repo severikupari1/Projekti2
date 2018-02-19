@@ -6,3 +6,12 @@ C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csh
 C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChain.csproj.CoreCompileInputs.cache
 C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChainDemo.dll
 C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChainDemo.pdb
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\bin\Release\BlockChainDemo.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\bin\Release\BlockChainDemo.pdb
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\bin\Release\Newtonsoft.Json.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\bin\Release\TinyWebServer.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\bin\Release\Newtonsoft.Json.xml
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChain.csprojResolveAssemblyReference.cache
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChain.csproj.CoreCompileInputs.cache
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChainDemo.dll
+C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain\obj\Release\BlockChainDemo.pdb
