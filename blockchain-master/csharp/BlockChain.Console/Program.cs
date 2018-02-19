@@ -38,6 +38,57 @@ namespace BlockChainDemo.Console
 
             conn.Close();
             System.Console.WriteLine("Done.");
+
+            try
+            {
+                System.Console.WriteLine("Connecting to MySQL...");
+                conn.Open();
+
+                string sql = "CREATE TABLE Inventory(Chain BLOB);";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+                }
+                rdr.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            System.Console.WriteLine("Done.");
+
+            try
+            {
+                System.Console.WriteLine("Connecting to MySQL...");
+                conn.Open();
+
+                string sql = "SELECT * from Inventory where 1";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+                }
+                rdr.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.ToString());
+            }
+
+            conn.Close();
+            System.Console.WriteLine("Done.");
+
+
+
             System.Console.Read();
         }
     }
