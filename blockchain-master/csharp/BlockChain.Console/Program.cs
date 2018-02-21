@@ -8,26 +8,27 @@ namespace BlockChainDemo.Console
     class Program
     {
 
-      
+
         static void Main(string[] args)
         {
             var chain = new BlockChain();
             var server = new WebServer(chain);
 
-            string connStr = "server = 160.153.129.223; user id = bloblo;Pwd=bloblo; database = bloblo;encrypt = no ";
-           MySqlConnection conn = new MySqlConnection(connStr);
+            //string connStr = "server = 160.153.129.223; user id = bloblo;Pwd=bloblo; database = bloblo;encrypt = no ";
+            string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
+            MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
                 System.Console.WriteLine("Connecting to MySQL...");
                 conn.Open();
 
-                string sql = "SELECT * from example where 1";
+                string sql = "SELECT * from asd where 1";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+                    System.Console.WriteLine(rdr[0] + " -- " );
                 }
                 rdr.Close();
             }
@@ -39,53 +40,31 @@ namespace BlockChainDemo.Console
             conn.Close();
             System.Console.WriteLine("Done.");
 
-            try
-            {
-                System.Console.WriteLine("Connecting to MySQL...");
-                conn.Open();
 
-                string sql = "CREATE TABLE Inventory(Chain BLOB);";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                
-                MySqlDataReader rdr = cmd.ExecuteReader();
 
-                while (rdr.Read())
-                {
-                    System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-                }
-                rdr.Close();
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine(ex.ToString());
-            }
+            //try
+            //{
+            //    System.Console.WriteLine("Connecting to MySQL...");
+            //    conn.Open();
 
-            conn.Close();
-            System.Console.WriteLine("Done.");
+            //    string sql = "SELECT * from  where 1";
+            //    MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-            try
-            {
-                System.Console.WriteLine("Connecting to MySQL...");
-                conn.Open();
+            //    MySqlDataReader rdr = cmd.ExecuteReader();
 
-                string sql = "SELECT * from Inventory where 1";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
+            //    while (rdr.Read())
+            //    {
+            //        System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+            //    }
+            //    rdr.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Console.WriteLine(ex.ToString());
+            //}
 
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read())
-                {
-                    System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-                }
-                rdr.Close();
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine(ex.ToString());
-            }
-
-            conn.Close();
-            System.Console.WriteLine("Done.");
+            //conn.Close();
+            //System.Console.WriteLine("Done.");
 
 
 
