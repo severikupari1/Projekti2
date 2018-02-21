@@ -19,11 +19,13 @@ namespace BlockChainDemo.Console
             var chain = new BlockChain();
 
             var s = chain.GetFullChain();
-            System.IO.File.WriteAllText("file.json", s);
-            //String json = JsonConvert.SerializeObject(response);
 
-            var readS = System.IO.File.ReadAllText("file.json");
-            BlockChain readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<BlockChain>(readS);
+
+            //System.IO.File.WriteAllText("file.json", s);
+           
+
+            //var readS = System.IO.File.ReadAllText("file.json");
+            //BlockChain readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<BlockChain>(readS);
 
             var server = new WebServer(chain);
 
