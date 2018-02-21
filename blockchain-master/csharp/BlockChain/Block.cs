@@ -10,10 +10,10 @@ namespace BlockChainDemo
         public List<Transaction> Transactions { get; set; }
         public int Proof { get; set; }
         public string PreviousHash { get; set; }
-
+        //LAITTEEN TIEDOT Stringi
         public override string ToString()
         {
-            return $"{Index} [{Timestamp.ToString("yyyy-MM-dd HH:mm:ss")}] Proof: {Proof} | PrevHash: {PreviousHash} | Trx: {Transactions.Count}";
+            return $"{Index} [{Timestamp.ToString("yyyy-MM-dd HH:mm:ss")}] Proof: {Proof} | PrevHash: {PreviousHash} | Trx: {Transactions.Count}"; //LAITTEEN TIEDOT
         }
     }
 }
