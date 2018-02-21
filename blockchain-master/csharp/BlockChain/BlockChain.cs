@@ -106,6 +106,7 @@ namespace BlockChainDemo
                 Transactions = _currentTransactions.ToList(),
                 Proof = proof,
                 PreviousHash = previousHash ?? GetHash(_chain.Last())
+                //LAITTEEN TIEDOT
             };
 
             _currentTransactions.Clear();
@@ -169,7 +170,7 @@ namespace BlockChainDemo
             return JsonConvert.SerializeObject(response);
         }
 
-        internal string GetFullChain()
+        public string GetFullChain()
         {
             var response = new
             {
