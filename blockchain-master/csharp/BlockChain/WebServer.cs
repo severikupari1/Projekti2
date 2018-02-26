@@ -41,6 +41,12 @@ namespace BlockChainDemo
                             json = new StreamReader(request.InputStream).ReadToEnd();
                             Transaction trx = JsonConvert.DeserializeObject<Transaction>(json);
                             int blockId = chain.CreateTransaction(trx.Sender, trx.Recipient, trx.Amount);
+
+                            var s = chain.GetFullChain();
+                            System.Console.WriteLine(s);
+
+                            System.IO.File.WriteAllText("file.json", s);
+
                             return $"Your transaction will be included in block {blockId}";
 
                         //GET: http://localhost:12345/chain
@@ -61,6 +67,10 @@ namespace BlockChainDemo
                         //GET: http://localhost:12345/nodes/resolve
                         case "/nodes/resolve":
                             return chain.Consensus();
+
+                        //case "/testi":
+                            //return string.Format("<HTML><BODY>TESTI sivu<br></BODY></HTML>");
+                            //break;
                     }
 
                     return "";
@@ -69,7 +79,8 @@ namespace BlockChainDemo
                 $"http://{host}:{port}/transactions/new/",
                 $"http://{host}:{port}/chain/",
                 $"http://{host}:{port}/nodes/register/",
-                $"http://{host}:{port}/nodes/resolve/"
+                $"http://{host}:{port}/nodes/resolve/",
+                $"http://{host}:{port}/testi/" //Added by Severi
             );
 
             server.Run();
