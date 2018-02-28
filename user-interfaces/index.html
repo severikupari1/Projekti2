@@ -28,6 +28,15 @@
 		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 		
 		<!-- favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+		<link rel="manifest" href="images/favicon/site.webmanifest">
+		<link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="images/favicon/favicon.ico">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
 	</head>
 	<body>
 		<!-- navbar -->
@@ -40,19 +49,29 @@
 						<span id="nav-style" class="icon-bar"></span>
 						<span id="nav-style" class="icon-bar"></span>
 					</button>
-					<a id="nav-style" class="navbar-brand visible-lg" href="index.html">Blockchain<small> - toimii!</small></a>
+					<img class="navbar-logo" src="images/navbar-logo.png">
+					<a id="nav-style" class="navbar-brand" href="index.html">Blockchain<small> - toimii!</small></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse">
 					<button onclick="load_page(transaction)" class="btn btn-nav"><span class="glyphicon glyphicon-envelope"></span> Transaktio</button>
+					<button onclick="load_page(user)" class="btn btn-nav"><span class="glyphicon glyphicon-user"></span> Hallitse tiliä</button>
 				</div>
 			</div>
 		</nav>
 		<!-- end navbar -->
 		
 		<!-- content -->
-		<img class="logo" src="images/logo.png" alt="Blockchain Logo">
+		<div class="container">
+			<h2>Kirjaudu sisään ole hyvä</h2>
+		</div>
 		<!-- end content -->
+		
+		<!-- footer -->
+		<footer>
+			<p>Footer</p>
+		</footer>
+		<!-- end footer -->
 	</body>
 </html>
