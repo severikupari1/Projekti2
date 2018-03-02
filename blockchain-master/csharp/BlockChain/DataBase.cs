@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,9 +83,9 @@ namespace BlockChainDemo
         }
 
         //Insert statement
-        public void Insert()
+        public void Insert(string query)
         {
-            string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+            //string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
 
             //open connection
             if (this.OpenConnection() == true)
@@ -101,9 +102,9 @@ namespace BlockChainDemo
         }
 
         //Update statement
-        public void Update()
+        public void Update(string query)
         {
-            string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
+            //string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -124,9 +125,9 @@ namespace BlockChainDemo
         }
 
         //Delete statement
-        public void Delete()
+        public void Delete(string query)
         {
-            string query = "DELETE FROM tableinfo WHERE name='John Smith'";
+            //string query = "DELETE FROM tableinfo WHERE name='John Smith'";
 
             if (this.OpenConnection() == true)
             {
@@ -136,7 +137,35 @@ namespace BlockChainDemo
             }
         }
 
+        public void Select(string haettava, string mista)
+        {
+            if (this.OpenConnection() == true)
+            {
+                SqlCommand command = new SqlCommand();
+                
+                command.CommandText = "SELECT" + haettava + "FROM" + mista;
 
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
+                            reader.GetString(1));
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found.");
+                }
+                reader.Close();
+
+
+            }
+
+            
+        }
 
     }
 }
