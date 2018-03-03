@@ -33,9 +33,10 @@ namespace BlockChainDemo.Console
             var server = new WebServer(chain);
 
 
-            string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
+            // string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
 
-            DatabaseConnection conn = new DatabaseConnection(connStr);
+            var connectionDb = new DataBase();
+            
             
 
             //string connStr = "server = 160.153.129.223; user id = bloblo;Pwd=bloblo; database = bloblo;encrypt = no ";
