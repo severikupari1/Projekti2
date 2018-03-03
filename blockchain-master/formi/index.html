@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<<<<<<< HEAD
 <body onload="">
     <form id="myForm" >
+=======
+>>>>>>> master
 
-        Maara: <input type="text" name="Amount" id="maara" value=""><br>
-        Recipient: <input type="text" name="Recipient" id="saaja" value="">
-        <input type="hidden" name="Sender" value="laite1" id="lahettaja"><br>
-        
+<body onload="">
+    <form id="myForm">
+
+        Maara:
+        <input type="text" name="Amount" id="maara" value="">
+        <br> Recipient:
+        <input type="text" name="Recipient" id="saaja" value="">
+        <input type="hidden" name="Sender" value="laite1" id="lahettaja">
+        <br>
+
     </form>
 
     <button onclick="nappi()">asd</button>
 
     <p id="tuloste"></p>
 
-        <script
-        src="http://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
+<<<<<<< HEAD
    
         <script>
 
@@ -71,5 +80,42 @@ console.log(jsonstring);
 
         </script>
     
+=======
+
+    <script>
+        // { "Amount":123, "Recipient":"ebeabf5cc1d54abdbca5a8fe9493b479", "Sender":"31de2e0ef1cb4937830fcfd5d2b3b24f" }
+        function nappi() {
+            // var formData = JSON.stringify($("#myForm").serializeArray());
+            //         console.log(formData);
+            var maara = document.getElementById("maara").value;
+            var saaja = document.getElementById("saaja").value;
+            var laite1 = document.getElementById("lahettaja").value;
+            // var stringi = maara + saaja + laite1;
+            var oikea = {
+                "Amount": Number(maara),
+                "Recipient": saaja,
+                "Sender": laite1
+            };
+            console.log(oikea);
+            var jsonstring = JSON.stringify(oikea);
+            console.log(jsonstring);
+            $.ajax({
+                type: "POST",
+                url: "http://10.211.48.51:12345/transactions/new",
+                data: JSON.stringify(oikea, null, '\t'),
+                success: function () { },
+                dataType: "json",
+                // contentType: "application/json"
+            });
+        }
+
+        function testi() {
+            console.log(oikea);
+        }
+
+    </script>
+
+>>>>>>> master
 </body>
+
 </html>
