@@ -43,7 +43,7 @@ namespace BlockChainDemo
 
 
         //open connection to database
-        private bool OpenConnection()
+        public bool OpenConnection()
         {
             try
             {
@@ -60,11 +60,11 @@ namespace BlockChainDemo
                 switch (ex.Number)
                 {
                     case 0:
-                        Console.WriteLine("Cannot connect to server.  Contact administrator"); 
+                        System.Console.WriteLine("Cannot connect to server.  Contact administrator"); 
                         break;
 
                     case 1045:
-                        Console.WriteLine("Invalid username/password, please try again");
+                        System.Console.WriteLine("Invalid username/password, please try again");
                         break;
                 }
                 return false;
@@ -82,7 +82,7 @@ namespace BlockChainDemo
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -156,13 +156,13 @@ namespace BlockChainDemo
                 {
                     while (reader.Read())
                     {
-                        Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
+                        System.Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
                             reader.GetString(1));
                     }
                 }
                 else
                 {
-                    Console.WriteLine("No rows found.");
+                    System.Console.WriteLine("No rows found.");
                 }
                 reader.Close();
 

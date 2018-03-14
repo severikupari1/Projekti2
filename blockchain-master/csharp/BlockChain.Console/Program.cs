@@ -36,6 +36,12 @@ namespace BlockChainDemo.Console
             // string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
 
             var connectionDb = new DataBase();
+
+            if (connectionDb.OpenConnection())
+            {
+                System.Console.WriteLine("Yhisty");
+            }
+            
             
             
 
