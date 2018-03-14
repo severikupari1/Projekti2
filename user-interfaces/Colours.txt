@@ -1,0 +1,2 @@
+Theme: 		rgb(80, 160, 210)	#50a0d2 	(theme colour is blue)
+Highlight: 	rgb(240, 160, 60) 	#f0a03c 	(highlight colour is orange)
