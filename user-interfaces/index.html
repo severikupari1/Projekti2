@@ -2,7 +2,7 @@
 <html lang="fi">
 	<head>
 		<!-- website title -->
-		<title>Blockchain UI</title>
+		<title>TrustChain</title>
 		
 		<!-- set charset to UTF-8 -->
 		<meta charset="UTF-8">
@@ -22,7 +22,7 @@
 		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 		
 		<!-- custom scripts -->
-		<script src="#"></script>
+		<script src="scripts/script.js"></script>
 		
 		<!-- fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
@@ -49,8 +49,7 @@
 						<span id="nav-style" class="icon-bar"></span>
 						<span id="nav-style" class="icon-bar"></span>
 					</button>
-					<img class="navbar-logo" src="images/navbar-logo.png">
-					<a id="nav-style" class="navbar-brand" href="index.html">Blockchain<small> - toimii!</small></a>
+					<a href="index.html"><img class="navbar-logo" src="images/navbar-logo.png"></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -64,7 +63,11 @@
 		
 		<!-- content -->
 		<div class="container">
-			<h2>Kirjaudu sisään ole hyvä</h2>
+			<h2>Kirjaudu sisään, ole hyvä:</h2>
+			
+			<input id="login_username" type="text" placeholder="Kirjautumistunnus">
+			<input id="login_password" type="password" placeholder="Salasana">
+			<button onclick="Login()">Kirjaudu</button>
 		</div>
 		<!-- end content -->
 		
