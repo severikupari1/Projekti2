@@ -53,8 +53,7 @@ namespace BlockChainDemo.Console
             System.Console.Read();
         }
 
-
-        static async Task MainAsync(BlockChain chain)
+        private static async Task MainAsync(BlockChain chain)
         {
 
             var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
