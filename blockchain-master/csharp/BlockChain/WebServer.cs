@@ -1,13 +1,31 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
+using Newtonsoft.Json;
 using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace BlockChainDemo
 {
     public class WebServer
     {
+        private static async Task MainAsync(BlockChain chain)
+        {
+
+            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+
+            IMongoDatabase db = client.GetDatabase("projekti2");
+            //var collection = db.GetCollection<BsonDocument>("chain");
+
+            var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+            var collection = db.GetCollection<BsonDocument>("chain");
+            await collection.InsertOneAsync(document);
+
+            // await collection.InsertOneAsync(document);
+        }
 
 
         public WebServer(BlockChain chain)
@@ -18,6 +36,7 @@ namespace BlockChainDemo
 
             var server = new TinyWebServer.WebServer(request =>
                 {
+                   
                     string path = request.Url.PathAndQuery.ToLower();
                     string query = "";
                     string json = "";
@@ -70,9 +89,10 @@ namespace BlockChainDemo
                         case "/nodes/resolve":
                             return chain.Consensus();
 
-                        //case "/testi":
-                            //return string.Format("<HTML><BODY>TESTI sivu<br></BODY></HTML>");
-                            //break;
+                        case "/testi":
+                             MainAsync(chain).Wait();
+                            return "Tallennettiin tietokantaan";
+                            
                     }
 
                     return "";

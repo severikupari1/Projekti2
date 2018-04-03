@@ -46,27 +46,27 @@ namespace BlockChainDemo.Console
 
             IMongoDatabase db = client.GetDatabase("projekti2");
             //System.Console.ReadKey();
-            MainAsync(chain).Wait();
+            //MainAsync(chain).Wait();
 
-
+            
 
             System.Console.Read();
         }
 
-        private static async Task MainAsync(BlockChain chain)
-        {
+        //private static async Task MainAsync(BlockChain chain)
+        //{
 
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+        //    var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
 
-            IMongoDatabase db = client.GetDatabase("projekti2");
-            //var collection = db.GetCollection<BsonDocument>("chain");
+        //    IMongoDatabase db = client.GetDatabase("projekti2");
+        //    //var collection = db.GetCollection<BsonDocument>("chain");
 
-            var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
-            var collection = db.GetCollection<BsonDocument>("chain");
-            await collection.InsertOneAsync(document);
+        //    var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+        //    var collection = db.GetCollection<BsonDocument>("chain");
+        //    await collection.InsertOneAsync(document);
 
-            // await collection.InsertOneAsync(document);
-        }
+        //    // await collection.InsertOneAsync(document);
+        //}
 
     }
 }
