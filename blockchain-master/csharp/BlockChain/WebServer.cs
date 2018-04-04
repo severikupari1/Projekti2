@@ -14,7 +14,7 @@ namespace BlockChainDemo
 {
     public class WebServer
     {
-       
+
 
         private static async Task MainAsync(BlockChain chain)
         {
@@ -23,11 +23,11 @@ namespace BlockChainDemo
 
             IMongoDatabase db = client.GetDatabase("projekti2");
             //var collection = db.GetCollection<BsonDocument>("chain");
-             
+
             //var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
 
             var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
-           
+
             var collection = db.GetCollection<BsonDocument>("chain");
             await collection.InsertOneAsync(document);
 
@@ -37,17 +37,27 @@ namespace BlockChainDemo
         static async Task FindAllFromChain()
         {
             var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-            
+
             IMongoDatabase db = client.GetDatabase("projekti2");
             var collection = db.GetCollection<BsonDocument>("chain");
 
-            await collection.Find(FilterDefinition<BsonDocument>.Empty)
-        .ForEachAsync(doc => Console.WriteLine(doc));
-
+            using (IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") } })    )
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    IEnumerable<BsonDocument> batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document);
+                        Console.WriteLine();
+                    }
+                }
+            }
 
         }
 
-        
+
 
 
 
@@ -57,10 +67,10 @@ namespace BlockChainDemo
             var settings = ConfigurationManager.AppSettings;
             string host = settings["host"]?.Length > 1 ? settings["host"] : "localhost";
             string port = settings["port"]?.Length > 1 ? settings["port"] : "12345";
-            
+
             var server = new TinyWebServer.WebServer(request =>
                 {
-                   
+
                     string path = request.Url.PathAndQuery.ToLower();
                     string query = "";
                     string json = "";
@@ -117,7 +127,7 @@ namespace BlockChainDemo
                             // MainAsync(chain).Wait();
                             FindAllFromChain().Wait();
                             return $"Tallennettiin tietokantaan,haku tietokannasta";
-                            
+
                     }
 
                     return "";
