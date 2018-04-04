@@ -2,6 +2,8 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -12,6 +14,8 @@ namespace BlockChainDemo
 {
     public class WebServer
     {
+       
+
         private static async Task MainAsync(BlockChain chain)
         {
 
@@ -19,14 +23,33 @@ namespace BlockChainDemo
 
             IMongoDatabase db = client.GetDatabase("projekti2");
             //var collection = db.GetCollection<BsonDocument>("chain");
-
+             
             //var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+
             var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+           
             var collection = db.GetCollection<BsonDocument>("chain");
             await collection.InsertOneAsync(document);
 
             // await collection.InsertOneAsync(document);
         }
+
+        static async Task FindAllFromChain()
+        {
+            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            
+            IMongoDatabase db = client.GetDatabase("projekti2");
+            var collection = db.GetCollection<BsonDocument>("chain");
+
+            await collection.Find(FilterDefinition<BsonDocument>.Empty)
+        .ForEachAsync(doc => Console.WriteLine(doc));
+
+
+        }
+
+        
+
+
 
 
         public WebServer(BlockChain chain)
@@ -34,7 +57,7 @@ namespace BlockChainDemo
             var settings = ConfigurationManager.AppSettings;
             string host = settings["host"]?.Length > 1 ? settings["host"] : "localhost";
             string port = settings["port"]?.Length > 1 ? settings["port"] : "12345";
-
+            
             var server = new TinyWebServer.WebServer(request =>
                 {
                    
@@ -91,8 +114,9 @@ namespace BlockChainDemo
                             return chain.Consensus();
 
                         case "/testi":
-                             MainAsync(chain).Wait();
-                            return "Tallennettiin tietokantaan";
+                            // MainAsync(chain).Wait();
+                            FindAllFromChain().Wait();
+                            return $"Tallennettiin tietokantaan,haku tietokannasta";
                             
                     }
 
