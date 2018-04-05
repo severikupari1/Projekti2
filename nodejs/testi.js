@@ -7,7 +7,7 @@ MongoClient.connect(url, function (err, db) {
     var query = {};
     dbo.collection("chain").find({}, { _id: 1}).toArray(function(err, result) {
         if (err) throw err;
-        console.log(result[0].chain[0].Index);
+        console.log(result[0].chain[1].Transactions);
         db.close();
       });
 });
