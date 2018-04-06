@@ -20,8 +20,9 @@ namespace BlockChainDemo
         private static async Task MainAsync(BlockChain chain)
         {
 
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            //var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
 
+            var client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             IMongoDatabase db = client.GetDatabase("projekti2");
             //var collection = db.GetCollection<BsonDocument>("chain");
 
@@ -37,13 +38,13 @@ namespace BlockChainDemo
 
         static async Task FindAllFromChain()
         {
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-
+           // var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            var client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             IMongoDatabase db = client.GetDatabase("projekti2");
             var collection = db.GetCollection<BsonDocument>("chain");
-
+            //ObjectId.Parse("5ac4899f623fca2184f4de56")
             using (IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(new BsonDocument {
-     { "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") } })    )
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } })    )
             {
                 while (await cursor.MoveNextAsync())
                 {
@@ -60,13 +61,13 @@ namespace BlockChainDemo
 
         static async Task FindAndUpdateFullToDb()
         {
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-
+            //var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            var client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             IMongoDatabase db = client.GetDatabase("projekti2");
             var collection = db.GetCollection<BsonDocument>("chain");
 
             using (IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(new BsonDocument {
-     { "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") } }))
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }))
             {
                 while (await cursor.MoveNextAsync())
                 {
@@ -83,26 +84,41 @@ namespace BlockChainDemo
 
         static async Task CallMain(BlockChain chain)
         {
-            var conString = "mongodb://localhost:27017";
-            var Client = new MongoClient(conString);
+            //var conString = "mongodb://localhost:27017";
+            //var Client = new MongoClient(conString);
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             var DB = Client.GetDatabase("projekti2");
             var collection = DB.GetCollection<BsonDocument>("chain");
             var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
-            
+
             //find the MasterID with 1130 and replace it with 1120
-     //       await collection.Find(new BsonDocument {
-     //{ "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") },{ "chain", document } })
-     //        .ForEachAsync(x => Console.WriteLine(x));
-            
+            //       await collection.Find(new BsonDocument {
+            //{ "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") },{ "chain", document } })
+            //        .ForEachAsync(x => Console.WriteLine(x));
+
             //retrive the data from collection
             Console.WriteLine(document);
 
             collection.FindOneAndReplace(new BsonDocument {
-     { "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") } }, document);
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }, document);
 
-            await collection.Find(new BsonDocument {
-     { "_id" , ObjectId.Parse("5ac4899f623fca2184f4de56") } })
-             .ForEachAsync(x => Console.WriteLine(x));
+            //       await collection.Find(new BsonDocument {
+            //{ "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } })
+            //        .ForEachAsync(x => Console.WriteLine(x));
+
+        }
+
+        public void FindAndSave(BlockChain chain)
+        {
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+
+            Console.WriteLine(document);
+
+            collection.FindOneAndReplace(new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }, document);
 
         }
 
@@ -171,10 +187,11 @@ namespace BlockChainDemo
                             return chain.Consensus();
 
                         case "/testi":
-                            // MainAsync(chain).Wait();
+                            //MainAsync(chain).Wait();
                             //FindAllFromChain().Wait();
-                            CallMain(chain).Wait();
-                            return $"Tallennettiin tietokantaan,haku tietokannasta";
+                            // CallMain(chain).Wait();
+                            FindAndSave(chain);
+                            return $"Tallennettiin tietokantaan,haku tietokannasta{chain.GetFullChain()}";
 
                     }
 

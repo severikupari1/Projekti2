@@ -35,38 +35,12 @@ namespace BlockChainDemo.Console
             BlockChain readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<BlockChain>(readS);
 
             var server = new WebServer(chain);
-
-
-            // string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
-
-            //var connectionDb = new DataBase();
-
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-
-
-            IMongoDatabase db = client.GetDatabase("projekti2");
-            //System.Console.ReadKey();
-            //MainAsync(chain).Wait();
-
-            
+    
 
             System.Console.Read();
         }
 
-        //private static async Task MainAsync(BlockChain chain)
-        //{
-
-        //    var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-
-        //    IMongoDatabase db = client.GetDatabase("projekti2");
-        //    //var collection = db.GetCollection<BsonDocument>("chain");
-
-        //    var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
-        //    var collection = db.GetCollection<BsonDocument>("chain");
-        //    await collection.InsertOneAsync(document);
-
-        //    // await collection.InsertOneAsync(document);
-        //}
+     
 
     }
 }

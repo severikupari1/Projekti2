@@ -57,3 +57,15 @@ C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\Bl
 C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.CopyComplete
 C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.exe
 C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.pdb
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe.config
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.pdb
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.dll
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\TinyWebServer.dll
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\Google.Protobuf.dll
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.pdb
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csprojResolveAssemblyReference.cache
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.BlockChainDemo.Console.exe.config
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.CoreCompileInputs.cache
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.exe
+C:\Users\Severi.DESKTOP-4E4A5DJ\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.pdb
