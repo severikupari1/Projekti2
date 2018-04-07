@@ -33,23 +33,23 @@ namespace BlockChainDemo.Console
             findOptions.Projection = "{'_id': 0}";
             var hakuchaini = collection.FindSync(filter,findOptions).FirstOrDefault();
             var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
+          
+            //System.Console.WriteLine(document.ToJson());
+            var testi = document.ToJson();
+            //var chain = BsonSerializer.Deserialize<BlockChain>(hakuchaini);
+            var kokochain = new BlockChain(document);
+            //var s = chain.GetFullChain();
+            // System.Console.WriteLine(s);
 
-            System.Console.WriteLine(document);
-     
-            var chain = new BlockChain();
-
-            var s = chain.GetFullChain();
-            System.Console.WriteLine(s);
-
-            System.IO.File.WriteAllText("file.json", s);
+            // System.IO.File.WriteAllText("file.json", s);
 
 
-            var readS = System.IO.File.ReadAllText("file.json");
-            BlockChain readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<BlockChain>(readS);
+            // var readS = System.IO.File.ReadAllText("file.json");
+            // Block readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<Block>(readS);
 
-            var server = new WebServer(chain);
-            
+            var server = new WebServer(kokochain);
 
+            System.Console.WriteLine(kokochain.GetFullChain());
 
             System.Console.Read();
         }

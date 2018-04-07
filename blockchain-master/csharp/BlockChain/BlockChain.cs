@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,6 +25,22 @@ namespace BlockChainDemo
         {
             NodeId = Guid.NewGuid().ToString().Replace("-", "");
             CreateNewBlock(proof: 100, previousHash: "1"); //genesis block
+        }
+
+        public BlockChain(BsonDocument haettuchain)
+        {
+
+
+
+            var model = new
+            {
+                chain = new List<Block>(),
+                length = 0
+            };
+
+            var testi = JsonConvert.DeserializeAnonymousType(haettuchain.ToJson(), model);
+
+            _chain = testi.chain;
         }
 
         //private functionality
@@ -80,11 +97,15 @@ namespace BlockChainDemo
                     string json = new StreamReader(response.GetResponseStream()).ReadToEnd();
                     var data = JsonConvert.DeserializeAnonymousType(json, model);
 
+
                     if (data.chain.Count > _chain.Count && IsValidChain(data.chain))
                     {
                         maxLength = data.chain.Count;
+
+
                         newChain = data.chain;
                     }
+                    _chain = newChain;
                 }
             }
 
