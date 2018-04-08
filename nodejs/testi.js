@@ -8,20 +8,28 @@ MongoClient.connect(url, function (err, db) {
     var dbo = db.db("projekti2");
     var query = {};
     
-    dbo.collection("chain").findOne({"_id": new ObjectId("5ac7ecc0f7b74235f8e9dab0")}, { _id: 1}).toArray(function(err, result) {
+    dbo.collection("chain").find({"_id": new ObjectId("5ac7ecc0f7b74235f8e9dab0")}, { _id: 1}).toArray(function(err, result) {
         if (err) throw err;
-        console.log(result[0].chain.length);
+        console.log(result);
        // var haku = result[0].chain[index].Transactions;
         for (var indexi = 0; indexi < result[0].chain.length; indexi++) {
             var tran = Object.keys(result[0].chain[indexi].Transactions);
             //console.log(tran.length);
-            for (let transactionindex = 0; transactionindex < tran.length; transactionindex++) {
+            for (let tranindex = 0; tranindex < tran.length; tranindex++) {
                 
-                console.log(result[0].chain[indexi].Transactions[transactionindex])
+                console.log(result[0].chain[indexi].Transactions[tranindex].Amount);
+                
+                if (result[0].chain[indexi].Transactions[tranindex].Recipient != null) {
+                    console.log(result[0].chain[indexi].Transactions[tranindex].Recipient);
+                }
+                
+
+                console.log(result[0].chain[indexi].Transactions[tranindex].Sender);
             }
             //console.log(result[0].chain[indexi].Transactions);
             
         }
+
         db.close();
       });
 
