@@ -38,13 +38,13 @@ namespace BlockChainDemo
 
         static async Task FindAllFromChain()
         {
-           // var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            // var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
             var client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             IMongoDatabase db = client.GetDatabase("projekti2");
             var collection = db.GetCollection<BsonDocument>("chain");
             //ObjectId.Parse("5ac4899f623fca2184f4de56")
             using (IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(new BsonDocument {
-     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } })    )
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }))
             {
                 while (await cursor.MoveNextAsync())
                 {
@@ -69,7 +69,7 @@ namespace BlockChainDemo
             var collection = DB.GetCollection<BsonDocument>("chain");
             var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
 
-        
+
 
             //retrive the data from collection
             Console.WriteLine(document);
@@ -90,7 +90,7 @@ namespace BlockChainDemo
 
             collection.FindOneAndReplace(new BsonDocument {
      { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }, document);
-            
+
         }
 
 
@@ -121,6 +121,7 @@ namespace BlockChainDemo
                     {
                         //GET: http://localhost:12345/mine
                         case "/mine":
+                            //FindAndSave(chain);
                             return chain.Mine();
 
                         //POST: http://localhost:12345/transactions/new
@@ -137,7 +138,7 @@ namespace BlockChainDemo
                             System.Console.WriteLine(s);
 
                             System.IO.File.WriteAllText("file.json", s);
-
+                            FindAndSave(chain);
                             return $"Your transaction will be included in block {blockId}";
 
                         //GET: http://localhost:12345/chain
@@ -171,7 +172,7 @@ namespace BlockChainDemo
                             FindAndSave(chain);
                             return $"Tallennettiin tietokantaan,haku tietokannasta{chain.GetFullChain()}";
 
-                        
+
                     }
 
                     return "";
@@ -181,13 +182,14 @@ namespace BlockChainDemo
                 $"http://{host}:{port}/chain/",
                 $"http://{host}:{port}/nodes/register/",
                 $"http://{host}:{port}/nodes/resolve/",
-                $"http://{host}:{port}/testi/" //Added by Severi
+                $"http://{host}:{port}/testi/", //Added by Severi
+                $"http://{host}:{port}/tallenna/"
             );
 
             server.Run();
         }
     }
-   
 
-   
+
+
 }

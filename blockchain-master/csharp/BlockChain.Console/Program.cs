@@ -47,10 +47,7 @@ namespace BlockChainDemo.Console
             var hakuchaini = collection.FindSync(filter, findOptions).FirstOrDefault();
             var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
 
-            //var testi = document.ToJson();
-
             var kokochain = new BlockChain(document);
-           
 
             var server = new WebServer(kokochain);
 
@@ -59,7 +56,7 @@ namespace BlockChainDemo.Console
             System.Console.Read();
         }
 
-     
+
 
     }
 }
