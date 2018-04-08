@@ -25,6 +25,7 @@ MongoClient.connect(url, function (err, db) {
                 
 
                 console.log(result[0].chain[indexi].Transactions[tranindex].Sender);
+                console.log(result[0].chain[indexi].Transactions[tranindex]);
             }
             //console.log(result[0].chain[indexi].Transactions);
             
