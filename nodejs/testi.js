@@ -15,9 +15,9 @@ MongoClient.connect(url, function (err, db) {
         for (var indexi = 0; indexi < result[0].chain.length; indexi++) {
             var tran = Object.keys(result[0].chain[indexi].Transactions);
             //console.log(tran.length);
-            for (let tranindex = 0; tranindex < tran.length; tranindex++) {
+            for (let transactionindex = 0; transactionindex < tran.length; transactionindex++) {
                 
-                console.log(result[0].chain[indexi].Transactions[tranindex])
+                console.log(result[0].chain[indexi].Transactions[transactionindex])
             }
             //console.log(result[0].chain[indexi].Transactions);
             
