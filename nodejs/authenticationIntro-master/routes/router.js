@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var path = require('path');
 
 
 // GET route for reading data
@@ -58,6 +59,11 @@ router.post('/', function (req, res, next) {
   }
 })
 
+// serve static files from template
+//app.use(express.static(__dirname + '/templateLogReg'));
+
+//app.use(express.static(__dirname + '/../templateLogReg'));
+
 // GET route after registering
 router.get('/profile', function (req, res, next) {
   User.findById(req.session.userId)
@@ -70,7 +76,10 @@ router.get('/profile', function (req, res, next) {
           err.status = 400;
           return next(err);
         } else {
-          return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
+          return res.sendFile(path.join(__dirname + '/../templateLogReg/testi.html'));
+          //console.log(path.join(__dirname + '/../templateLogReg/testi.html'));
+         // return res.sendFile(path.join(__dirname + '/../templateLogReg/testi.html'));
+          //return res.send('<h1>Name: </h1>' + user.username + '<h2>Mail: </h2>' + user.email + '<br><a type="button" href="/logout">Logout</a>')
         }
       }
     });
