@@ -8,98 +8,55 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using MongoDB.Driver;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 namespace BlockChainDemo.Console
 {
+
     class Program
     {
 
-        
+        public BsonDocument ReturnBsonDoc()
+        {
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var filter = new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } };
+
+            var findOptions = new FindOptions<BsonDocument>();
+            findOptions.Projection = "{'_id': 0}";
+            var hakuchaini = collection.FindSync(filter, findOptions).FirstOrDefault();
+            var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
+            return document;
+        }
 
 
         static void Main(string[] args)
         {
-            var chain = new BlockChain();
-            
-            var s = chain.GetFullChain();
-            System.Console.WriteLine(s);
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var filter = new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } };
 
-            System.IO.File.WriteAllText("file.json", s);
-           
+            var findOptions = new FindOptions<BsonDocument>();
+            findOptions.Projection = "{'_id': 0}";
+            var hakuchaini = collection.FindSync(filter, findOptions).FirstOrDefault();
+            var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
 
-            var readS = System.IO.File.ReadAllText("file.json");
-            BlockChain readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<BlockChain>(readS);
+            var kokochain = new BlockChain(document);
 
-            var server = new WebServer(chain);
+            var server = new WebServer(kokochain);
 
-
-            // string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
-
-            var connectionDb = new DataBase();
-
-            if (connectionDb.OpenConnection())
-            {
-                System.Console.WriteLine("Yhisty");
-            }
-            
-            
-            
-
-            //string connStr = "server = 160.153.129.223; user id = bloblo;Pwd=bloblo; database = bloblo;encrypt = no ";
-            
-            //MySqlConnection conn = new MySqlConnection(connStr);
-            //try
-            //{
-            //    System.Console.WriteLine("Connecting to MySQL...");
-            //    conn.Open();
-
-            //    string sql = "SELECT * from asd where 1";
-            //    MySqlCommand cmd = new MySqlCommand(sql, conn);
-            //    MySqlDataReader rdr = cmd.ExecuteReader();
-
-            //    while (rdr.Read())
-            //    {
-            //        System.Console.WriteLine(rdr[0] + " -- " );
-            //    }
-            //    rdr.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    System.Console.WriteLine(ex.ToString());
-            //}
-
-            //conn.Close();
-            //System.Console.WriteLine("Done.");
-
-
-
-            //try
-            //{
-            //    System.Console.WriteLine("Connecting to MySQL...");
-            //    conn.Open();
-
-            //    string sql = "SELECT * from  where 1";
-            //    MySqlCommand cmd = new MySqlCommand(sql, conn);
-
-            //    MySqlDataReader rdr = cmd.ExecuteReader();
-
-            //    while (rdr.Read())
-            //    {
-            //        System.Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-            //    }
-            //    rdr.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    System.Console.WriteLine(ex.ToString());
-            //}
-
-            //conn.Close();
-            //System.Console.WriteLine("Done.");
-
-
+            System.Console.WriteLine(kokochain.GetFullChain());
 
             System.Console.Read();
         }
+
+
+
     }
 }

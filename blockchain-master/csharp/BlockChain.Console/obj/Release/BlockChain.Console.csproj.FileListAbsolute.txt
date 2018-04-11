@@ -39,3 +39,8 @@ C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.
 C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChain.Console.csproj.CoreCompileInputs.cache
 C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChainDemo.Console.exe
 C:\Users\s704383\Documents\GitHub\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChainDemo.Console.pdb
+C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChain.Console.csprojResolveAssemblyReference.cache
+C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChainDemo.Console.exe.config
+C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChain.Console.csproj.CoreCompileInputs.cache
+C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChainDemo.Console.exe
+C:\wamp64\www\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Release\BlockChainDemo.Console.pdb
