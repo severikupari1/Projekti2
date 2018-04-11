@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fi">
+	<head>
+		<!-- website title -->
+		<title>TrustChain</title>
+		
+		<!-- set charset to UTF-8 -->
+		<meta charset="UTF-8">
+		
+		<!-- get device width, set viewport width -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		
+		<!-- IE compability -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		
+		<!-- Bootstrap 3.3.7 -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<!-- custom CSS -->
+		<link rel="stylesheet" type="text/css" href="styles/styles.css">
+		
+		<!-- custom scripts -->
+		<script src="scripts/script.js"></script>
+		
+		<!-- fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+		
+		<!-- favicons -->
+		<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+		<link rel="manifest" href="images/favicon/site.webmanifest">
+		<link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="images/favicon/favicon.ico">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#ffffff">
+	</head>
+	<body>
+		<!-- navbar -->
+		<div class="navbar-wrapper">
+			<nav class="navbar navbar-default">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" title="Valikko" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<img class="navbar-xs-logo visible-xs" src="images/logo-text-white.png" onclick="LoadPage('page-front')">
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div id="navbar" class="collapse navbar-collapse">
+						<div class="navbar-logo-area">
+							<img class="navbar-logo hidden-xs" src="images/logo-text.png" onclick="LoadPage('page-front')">
+						</div>
+						
+						<!-- buttons for > xs -->
+						<button onclick="LoadPage('page-transaction')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-envelope nav-glyph"></span> Transaktio</button>
+						<button onclick="LoadPage('page-chain')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-list-alt nav-glyph"></span> Haku</button>
+						<button onclick="LoadPage('page-user')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-user nav-glyph"></span> Hallitse tiliä</button>
+						<button onclick="Logout()" class="btn btn-nav hidden-xs" title="Kirjaudu ulos"><span class="glyphicon glyphicon-log-out nav-glyph"></span></button>
+						
+						<!-- buttons for <= xs -->
+						<button onclick="LoadPage('page-transaction')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-envelope nav-glyph"></span> Transaktio</button>
+						<button onclick="LoadPage('page-chain')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-list-alt nav-glyph"></span> Haku</button>
+						<button onclick="LoadPage('page-user')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-user nav-glyph"></span> Hallitse tiliä</button>
+						<button onclick="Logout()" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-log-out nav-glyph"></span> Kirjaudu ulos</button>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!-- end navbar -->
+		
+		<!-- content -->
+		<!-- login page -->
+		<div id="page-login" class="container">
+			<h2>Kirjaudu sisään, ole hyvä:</h2>
+			
+			<input id="login-username" class="form-control login-input" type="text" placeholder="Kirjautumistunnus">
+			
+			<input id="login-password" class="form-control login-input" type="password" placeholder="Salasana">
+			<button class="btn btn-login" onclick="Login()">Kirjaudu sisään</button>
+		</div>
+		<!-- end login page -->
+		
+		<!-- frontpage -->
+		<div id="page-front" class="container">
+			<h2>Tervetuloa</h2>
+			
+			<button onclick="LoadPage('page-transaction')" class="btn btn-menu"><span class="glyphicon glyphicon-envelope"></span> Transaktio</button>
+			<br />
+			<button onclick="LoadPage('page-chain')" class="btn btn-menu"><span class="glyphicon glyphicon-list-alt"></span> Haku</button>
+			<br />
+			<button onclick="LoadPage('page-user')" class="btn btn-menu"><span class="glyphicon glyphicon-user"></span> Hallitse tiliä</button>
+			<br />
+			<button onclick="Logout()" class="btn btn-menu"><span class="glyphicon glyphicon-log-out"></span> Kirjaudu ulos</button>
+		</div>
+		<!-- end frontpage -->
+		
+		<!-- transaction page -->
+		<div id="page-transaction" class="container">
+			<h2>Uusi transaktio</h2>
+			<hr />
+			<div class="row">
+				<div class="col-sm-4">
+					<img id="transaction-product-img" src="#" alt="">
+				</div>
+				
+				<div class="col-sm-4">
+					<p>Tuote:</p>
+					<input id="transaction-product" class="form-control transaction-input" type="text" placeholder="Tuotteen ID">
+					<br />
+					<p>Vastaanottaja:</p>
+					<input id="login-password" class="form-control transaction-input" type="text" placeholder="Vastaanottajan ID">
+				</div>
+				
+				<div class="col-sm-4">
+					<p>Työ:</p>
+					<textarea id="transaction-work" class="form-control transaction-input"  placeholder="Kuvaus tehdystä työstä, tässä voi olla myös alasvetovalikko"></textarea>
+				</div>
+			</div>
+			<button class="btn btn-transaction" onclick="Login()">Tallenna</button>
+		</div>
+		<!-- end transaction page -->
+		
+		<!-- view chain page -->
+		<div id="page-chain" class="container">
+			<h2 class="text-center">Haku</h2>
+			<hr />
+			<!-- Search -->
+			<div class="row">
+				<div class="col-sm-4">
+					<p>Tuotteen avain</p>
+					<input id="search" type="text" class="form-control" placeholder="Hae tuotetunnuksella">
+				</div>
+				<div class="col-sm-4">
+					<p>Lähettäjä</p>
+					<select id="sender" class="form-control" placeholder="Valitse lähettäjä">
+						<option value="1">ID 1</option>
+						<option value="2">ID 2</option>
+						<option value="3">ID 3</option>
+					</select>
+				</div>
+				<div class="col-sm-4">
+					<p>Vastaanottaja</p>
+					<select id="receiver" class="form-control" placeholder="Valitse vastaanottaja">
+						<option value="1">ID 1</option>
+						<option value="2">ID 2</option>
+						<option value="3">ID 3</option>
+					</select>
+				</div>
+			</div>
+			<!-- end Search -->
+			
+			<!-- Search results -->
+			<h3>Transaktiot<span><button class="btn btn-clear pull-right" onclick="ClearResults()">Tyhjennä</button></span></h3>
+			<br />
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th><button class="btn btn-sort" onclick="SortByID()">ID <span id="sort-id-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						<th><button class="btn btn-sort" onclick="SortByBlock()">Lohko <span id="sort-block-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						<th><button class="btn btn-sort" onclick="SortBySender()">Lähettäjä <span id="sort-sender-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						<th><button class="btn btn-sort" onclick="SortByReceiver()">Vastaanottaja <span id="sort-receiver-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						<th><button class="btn btn-sort" onclick="SortByProduct()">Tuote <span id="sort-product-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						<th><button class="btn btn-sort" onclick="SortByWork()">Työ <span id="sort-work-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						<th><button class="btn btn-sort" onclick="SortByTime()">Aika <span id="sort-time-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+					</tr>
+				</thead>
+				<tbody id="transaction-list">
+					<tr id="t-[ID]">
+						<td><button class="btn" onclick="SearchByID('j3823k')">j3823k</button></td>
+						<td><button class="btn" onclick="SearchByBlock('234mk3')">234mk3</button></td>
+						<td><button class="btn" onclick="SearchBySender('gl03ik')">gl03ik - Einari Koponen</button></td>
+						<td><button class="btn" onclick="SearchByReceiver('4m3o23')">4m3o23 - Veijo Rehmaala</button></td>
+						<td><button class="btn" onclick="SearchByProduct('m4i39s')">m4i39s</button></td>
+						<td><button class="btn" onclick="SearchByWork('Hitsausta ja sen sellasta')">Hitsausta ja sen sellasta</button></td>
+						<td><button class="btn" onclick="SearchByTime(20180404)">04.04.2018</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- end Search results -->
+			
+		<!--
+		Hakukenttä johon voi kirjottaa ja etsiä vaikkapa tuote ID perusteella
+
+		alasvetovalikot lähettäjille ja vastaanottajille hakua varten
+
+		bootstrap lista
+
+		napit järjestelylle (sort), vanhimmasta uusimpaan, lähettäjän tai tuotteen perusteella jne.
+
+		työpöytäversioon lista tiedoilla:
+		ID, lohko, lähettäjä, vastaanottaja, tuote, työ, päivämäärä
+
+		mobiiliin lista jossa ID:eet ja loput tiedot piilotettu/lyhennetty, painamalla laajenee alaspäin ja näyttää kaikki tiedot
+
+		tiedot: lohko, lähettäjä, vastaanottaja, tuote ja päivämäärä napeiksi joista voi ehtiä juuri sillä tiedolla löytyvät muut transaktiot
+		-->
+		
+		</div>
+		<!-- end view chain page -->
+
+		<!-- user page -->
+		<div id="page-user" class="container">
+			<p>User page tähän</p>
+		</div>
+		<!-- end user page -->
+
+		<!-- end content -->
+		
+		<!-- DEBUG viewport sizes when viewing -->
+		<!--
+		<p class="visible-xs">Bootstrap viewport size: xs</p>
+		<p class="visible-sm">Bootstrap viewport size: sm</p>
+		<p class="visible-md">Bootstrap viewport size: md</p>
+		<p class="visible-lg">Bootstrap viewport size: lg</p>
+		<!-- end DEBUG viewport sizes when viewing -->
+		
+		<!-- footer -->
+		<footer>
+			<div class="container">
+				<!-- FOOTER CONTENT HERE -->
+			</div>
+		</footer>
+		<!-- end footer -->
+	</body>
+</html>
