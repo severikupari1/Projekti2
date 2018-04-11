@@ -1,7 +1,7 @@
 <instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <instrumentation>
         <events>
-            <provider name="NodeJS-ETW-provider" guid="{77754E9B-264B-4D8D-B981-E4135C1ECB0C}" symbol="NODE_ETW_PROVIDER" message="$(string.NodeJS-ETW-provider.name)" messageFileName="C:\Projekti2\nodejs\node.exe" resourceFileName="C:\Projekti2\nodejs\node.exe">
+            <provider name="NodeJS-ETW-provider" guid="{77754E9B-264B-4D8D-B981-E4135C1ECB0C}" symbol="NODE_ETW_PROVIDER" message="$(string.NodeJS-ETW-provider.name)" messageFileName="C:\Users\s704383\Desktop\Projekti2\nodejs\node.exe" resourceFileName="C:\Users\s704383\Desktop\Projekti2\nodejs\node.exe">
 
                 <tasks>
                   <task name="MethodRuntime" value="1" symbol="JSCRIPT_METHOD_RUNTIME_TASK">
