@@ -2,6 +2,8 @@
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -12,20 +14,88 @@ namespace BlockChainDemo
 {
     public class WebServer
     {
-        private static async Task MainAsync(BlockChain chain)
+
+
+
+        private static async Task InsertToDatabase(BlockChain chain)
         {
 
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            //var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
 
+            var client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             IMongoDatabase db = client.GetDatabase("projekti2");
             //var collection = db.GetCollection<BsonDocument>("chain");
 
+            //var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+
             var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+
             var collection = db.GetCollection<BsonDocument>("chain");
             await collection.InsertOneAsync(document);
 
             // await collection.InsertOneAsync(document);
         }
+
+        static async Task FindAllFromChain()
+        {
+            // var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
+            var client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            IMongoDatabase db = client.GetDatabase("projekti2");
+            var collection = db.GetCollection<BsonDocument>("chain");
+            //ObjectId.Parse("5ac4899f623fca2184f4de56")
+            using (IAsyncCursor<BsonDocument> cursor = await collection.FindAsync(new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    IEnumerable<BsonDocument> batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document);
+                        Console.WriteLine();
+                    }
+                }
+            }
+
+        }
+
+
+        static async Task CallMain(BlockChain chain)
+        {
+            //var conString = "mongodb://localhost:27017";
+            //var Client = new MongoClient(conString);
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+
+
+
+            //retrive the data from collection
+            Console.WriteLine(document);
+
+            collection.FindOneAndReplace(new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }, document);
+
+        }
+
+        public void FindAndSave(BlockChain chain)
+        {
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
+
+            Console.WriteLine(document);
+
+            collection.FindOneAndReplace(new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } }, document);
+
+        }
+
+
+
+
 
 
         public WebServer(BlockChain chain)
@@ -36,7 +106,7 @@ namespace BlockChainDemo
 
             var server = new TinyWebServer.WebServer(request =>
                 {
-                   
+
                     string path = request.Url.PathAndQuery.ToLower();
                     string query = "";
                     string json = "";
@@ -51,6 +121,7 @@ namespace BlockChainDemo
                     {
                         //GET: http://localhost:12345/mine
                         case "/mine":
+                            //FindAndSave(chain);
                             return chain.Mine();
 
                         //POST: http://localhost:12345/transactions/new
@@ -67,7 +138,7 @@ namespace BlockChainDemo
                             System.Console.WriteLine(s);
 
                             System.IO.File.WriteAllText("file.json", s);
-
+                            FindAndSave(chain);
                             return $"Your transaction will be included in block {blockId}";
 
                         //GET: http://localhost:12345/chain
@@ -89,10 +160,19 @@ namespace BlockChainDemo
                         case "/nodes/resolve":
                             return chain.Consensus();
 
-                        case "/testi":
-                             MainAsync(chain).Wait();
+                        case "/tallenna":
+                            InsertToDatabase(chain).Wait();
                             return "Tallennettiin tietokantaan";
-                            
+
+                        case "/testi":
+                            //MainAsync(chain).Wait();
+                            //FindAllFromChain().Wait();
+                            // CallMain(chain).Wait();
+                            //InsertToDatabase(chain).Wait();
+                            FindAndSave(chain);
+                            return $"Tallennettiin tietokantaan,haku tietokannasta{chain.GetFullChain()}";
+
+
                     }
 
                     return "";
@@ -102,10 +182,14 @@ namespace BlockChainDemo
                 $"http://{host}:{port}/chain/",
                 $"http://{host}:{port}/nodes/register/",
                 $"http://{host}:{port}/nodes/resolve/",
-                $"http://{host}:{port}/testi/" //Added by Severi
+                $"http://{host}:{port}/testi/", //Added by Severi
+                $"http://{host}:{port}/tallenna/"
             );
 
             server.Run();
         }
     }
+
+
+
 }

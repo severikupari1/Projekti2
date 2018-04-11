@@ -18,55 +18,45 @@ namespace BlockChainDemo.Console
     class Program
     {
 
+        public BsonDocument ReturnBsonDoc()
+        {
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var filter = new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } };
 
+            var findOptions = new FindOptions<BsonDocument>();
+            findOptions.Projection = "{'_id': 0}";
+            var hakuchaini = collection.FindSync(filter, findOptions).FirstOrDefault();
+            var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
+            return document;
+        }
 
 
         static void Main(string[] args)
         {
-            var chain = new BlockChain();
+            var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
+            var DB = Client.GetDatabase("projekti2");
+            var collection = DB.GetCollection<BsonDocument>("chain");
+            var filter = new BsonDocument {
+     { "_id" , ObjectId.Parse("5ac7ecc0f7b74235f8e9dab0") } };
 
-            var s = chain.GetFullChain();
-            System.Console.WriteLine(s);
+            var findOptions = new FindOptions<BsonDocument>();
+            findOptions.Projection = "{'_id': 0}";
+            var hakuchaini = collection.FindSync(filter, findOptions).FirstOrDefault();
+            var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
 
-            System.IO.File.WriteAllText("file.json", s);
+            var kokochain = new BlockChain(document);
 
+            var server = new WebServer(kokochain);
 
-            var readS = System.IO.File.ReadAllText("file.json");
-            BlockChain readChain = Newtonsoft.Json.JsonConvert.DeserializeObject<BlockChain>(readS);
-
-            var server = new WebServer(chain);
-
-
-            // string connStr = "server = codez.savonia.fi;Pwd=p22018kg5; user id = p22018kg5; database = projekti2_2018_kevat_group5;encrypt = no";
-
-            //var connectionDb = new DataBase();
-
-            var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-
-
-            IMongoDatabase db = client.GetDatabase("projekti2");
-            //System.Console.ReadKey();
-            //MainAsync(chain).Wait();
-
-            
+            System.Console.WriteLine(kokochain.GetFullChain());
 
             System.Console.Read();
         }
 
-        //private static async Task MainAsync(BlockChain chain)
-        //{
 
-        //    var client = new MongoClient(new MongoUrl("mongodb://localhost:27017"));
-
-        //    IMongoDatabase db = client.GetDatabase("projekti2");
-        //    //var collection = db.GetCollection<BsonDocument>("chain");
-
-        //    var document = BsonSerializer.Deserialize<BsonDocument>(chain.GetFullChain());
-        //    var collection = db.GetCollection<BsonDocument>("chain");
-        //    await collection.InsertOneAsync(document);
-
-        //    // await collection.InsertOneAsync(document);
-        //}
 
     }
 }

@@ -1,5 +1,8 @@
 
 blockchain-master/csharp/.vs/BlockChain/v15/sqlite3/db.lock
 blockchain-master/csharp/.vs/BlockChain/v15/.suo
+<<<<<<< HEAD
 *.ide-wal
+=======
+>>>>>>> 1c21e53b759c6e425859336dfd9c68f7b82f1c56
 *.ide-shm
