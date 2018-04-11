@@ -61,7 +61,7 @@ router.post('/', function (req, res, next) {
 })
 
 // serve static files from template
-app.use(express.static(__dirname + '/styles'));
+app.use(express.static(path.join(__dirname + '/../templateLogReg/UserInterface/')));
 
 //app.use(express.static(__dirname + '/../templateLogReg'));
 
