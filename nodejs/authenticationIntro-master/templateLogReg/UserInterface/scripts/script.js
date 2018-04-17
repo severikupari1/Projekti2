@@ -276,6 +276,8 @@ function ClearResults()
 
 function Refresh()
 {
+	$("#search-title").html("Haetaan transaktioita...");
+	
 	// Get chain data from database
 	$.ajax({
 		
@@ -287,19 +289,19 @@ function Refresh()
 			console.log(data);
 			chainData = data.chain;
 			console.log(chainData);
+			
+			// Generate table from blockchain data for chain view page
+			JsonToDataTable();
+			
+			// Generate options for form selects
+			GenerateSearchSenderOptions();
+			GenerateSearchReceiverOptions();
+			GenerateSearchAmountOptions();
+			
+			// Reset search title
+			$("#search-title").html("Kaikki transaktiot:");
 		},
 		dataType: "json",
 
 	});
-	
-	// Generate table from blockchain data for chain view page
-	JsonToDataTable();
-	
-	// Generate options for form selects
-	GenerateSearchSenderOptions();
-	GenerateSearchReceiverOptions();
-	GenerateSearchAmountOptions();
-	
-	// Reset search title
-	$("#search-title").html("Kaikki transaktiot:");
 }
