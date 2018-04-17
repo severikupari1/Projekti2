@@ -167,7 +167,7 @@ function SearchByReceiver(key = 0)
 	{
 		for (var d = 0; d < chainData[i].Transactions.length; d++)
 		{
-			if (chainData[i].Transactions[d].Receiver == key)
+			if (chainData[i].Transactions[d].Recipient == key)
 			{
 				AddResultRow(chainData[i].Transactions[d].Sender,
 				chainData[i].Transactions[d].Recipient,
