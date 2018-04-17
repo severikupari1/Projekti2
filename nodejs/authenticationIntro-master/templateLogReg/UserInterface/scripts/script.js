@@ -99,7 +99,7 @@ function GenerateSearchAmountOptions()
 			// Check if id is in skipArray
 			if (!skipArray.includes(id))
 			{
-				output += '<option value="' + id + '">ID ' + id + '</option>';
+				output += '<option value="' + id + '">' + id + '</option>';
 				skipArray.push(id);
 			}
 		}
