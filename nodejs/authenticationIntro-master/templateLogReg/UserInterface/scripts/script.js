@@ -70,7 +70,7 @@ function GenerateSearchReceiverOptions()
 	{
 		for (var d = 0; d < chainData[i].Transactions.length; d++)
 		{
-			var id = chainData[i].Transactions[d].Receiver;
+			var id = chainData[i].Transactions[d].Recipient;
 			
 			// Check if id is in skipArray
 			if (!skipArray.includes(id))
