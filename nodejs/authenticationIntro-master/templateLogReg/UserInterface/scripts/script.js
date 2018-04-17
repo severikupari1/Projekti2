@@ -342,8 +342,6 @@ function SearchByTime(key = 0)
 	
 	// Flush values of work and date inputs
 	$("#search-work").val("");
-	$("#search-date-min").val("");
-	$("#search-date-max").val("");
 	
 	var minDateString = min.getDate() + "." + (min.getMonth()+1) + "." + min.getFullYear();
 	var maxDateString = max.getDate() + "." + (max.getMonth()+1) + "." + max.getFullYear();
