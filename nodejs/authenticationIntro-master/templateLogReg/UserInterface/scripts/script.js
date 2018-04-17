@@ -58,7 +58,7 @@ function NewTransaction()
 	$.ajax({
 		crossorigin:true,
 		type: "POST",
-		url: "http://localhost:12345/transactions/new",
+		url: "http://10.211.48.117:12345/transactions/new",
 		data: jsonstring,
 		success: function(){
 			$('#transaction-result').html("Transaktio tallennettu!");
