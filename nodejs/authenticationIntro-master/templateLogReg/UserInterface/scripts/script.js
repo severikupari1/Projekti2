@@ -66,7 +66,7 @@ function NewTransaction()
 	$.ajax({
 		crossorigin:true,
 		type: "POST",
-		url: "http://10.211.48.117:12345/transactions/new",
+		url: "http://10.211.48.117:3000/transactions/new",
 		data: jsonstring,
 		success: function(){
 			console.log('NewTransaction ajax call finished!');
