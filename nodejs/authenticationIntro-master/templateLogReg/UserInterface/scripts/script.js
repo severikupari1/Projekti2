@@ -245,9 +245,8 @@ function AddResultRow(Sender, Receiver, Amount)
 {
 	var tranList = $('#transaction-list');
 	var transactions = tranList.html();
-	var output = '<tr id="t-' + ID + '">';
+	var output = '<tr id="transaction-row">';
 	console.log('AddResultRow started...');
-	console.log('Transaction ID: ' + ID);
 	
 	// Add Sender field in row
 	output += '<td><button class="btn btn-data" onclick="SearchBySender(\'' + Sender + '\')" title="Hae lähettäjän tunnuksella">' + Sender + '</button></td>';
@@ -282,7 +281,7 @@ function Refresh()
 		success: function (data) {
 			
 			var blockchainData = JSON.stringify(data);
-			chainData = blockchainData[2];
+			chainData = blockchainData.chain;
 			console.log(chainData);
 		},
 		dataType: "json",
