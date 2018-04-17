@@ -40,11 +40,16 @@ function LoadPage(name)
 
 function NewTransaction()
 {
+	console.log('NewTransaction started...');
 	$('#transaction-result').html("Lähetetään tietoja...");
 	
 	var sender = $('#transaction-sender').val();
 	var receiver = $('#transaction-receiver').val();
 	var amount = $('#transaction-amount').val();
+	
+	console.log('NewTransaction sender: ' + sender);
+	console.log('NewTransaction receiver: ' + receiver);
+	console.log('NewTransaction amount: ' + amount);
 	
 	var data =
 	{
@@ -52,6 +57,9 @@ function NewTransaction()
 		"Recipient":receiver,
 		"Sender":sender
 	};
+	
+	console.log('NewTransaction data: ' + data);
+	console.log('NewTransaction starting ajax call...');
 	
 	var jsonstring = JSON.stringify(data);
 	
@@ -61,11 +69,13 @@ function NewTransaction()
 		url: "http://10.211.48.117:12345/transactions/new",
 		data: jsonstring,
 		success: function(){
+			console.log('NewTransaction ajax call finished!');
 			$('#transaction-result').html("Transaktio tallennettu!");
 		},
 		dataType: "json",
 	});
 
+	console.log('NewTransaction done!');
 }
 
 function GenerateSearchSenderOptions()
@@ -260,8 +270,6 @@ function JsonToDataTable()
 {
 	console.log('JsonToDataTable started...');
 	
-	console.log('chainData: ' + chainData);	
-	
 	// Call a function to clear the search results before outputting new ones
 	ClearResults();
 	
@@ -279,10 +287,11 @@ function JsonToDataTable()
 
 function AddResultRow(Sender, Receiver, Amount)
 {
+	console.log('AddResultRow started...');
+	
 	var tranList = $('#transaction-list');
 	var transactions = tranList.html();
 	var output = '<tr id="transaction-row">';
-	console.log('AddResultRow started...');
 	
 	// Add Sender field in row
 	output += '<td><button class="btn btn-data" onclick="SearchBySender(\'' + Sender + '\')" title="Hae lähettäjän tunnuksella">' + Sender + '</button></td>';
@@ -293,7 +302,7 @@ function AddResultRow(Sender, Receiver, Amount)
 	// Add Amount field in row
 	output += '<td><button class="btn btn-data" onclick="SearchByAmount(\'' + Amount + '\')" title="Hae määrällä">' + Amount + '</button></td>';
 	
-	console.log('output to be added: ' + output);
+	console.log('AddResultRow output to be added: ' + output);
 	
 	tranList.html(transactions + output);
 	console.log('AddResultRow done!');
@@ -308,8 +317,10 @@ function ClearResults()
 
 function Refresh()
 {
+	console.log('Refresh started...');
 	$("#search-title").html("Haetaan transaktioita...");
 	
+	console.log('Refresh starting ajax call...');
 	// Get chain data from database
 	$.ajax({
 		
@@ -318,9 +329,8 @@ function Refresh()
 
 		success: function (data) {
 			
-			console.log(data);
 			chainData = data.chain;
-			console.log(chainData);
+			console.log('Refresh ajax call data: ' + chainData);
 			
 			// Generate table from blockchain data for chain view page
 			JsonToDataTable();
@@ -332,8 +342,12 @@ function Refresh()
 			
 			// Reset search title
 			$("#search-title").html("Kaikki transaktiot:");
+			
+			console.log('Refresh ajax call done!');
 		},
 		dataType: "json",
 
 	});
+	
+	console.log('Refresh done!');
 }
