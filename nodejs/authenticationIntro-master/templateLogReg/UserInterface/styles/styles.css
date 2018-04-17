@@ -117,17 +117,6 @@ hr
 	color: rgb(240, 160, 60);
 }
 
-#page-login
-{
-	text-align: center;
-}
-
-.login-input
-{
-	width: 250px;
-	margin: 5px auto;
-}
-
 #page-transaction
 {
 	text-align: center;
@@ -167,10 +156,10 @@ hr
 	text-align: center;
 }
 
-.btn-clear
+.btn-refresh
 {
 	color: rgb(255, 255, 255); 
-	background-color: rgb(200, 30, 0);
+	background-color: rgb(80, 160, 210);
 }
 
 .btn-sort
@@ -178,18 +167,36 @@ hr
 	background-color: transparent;
 }
 
-
-
 .btn-sort:hover
 {
-	color: rgb(0, 0, 0):
+	color: rgb(255, 255, 255);
+	background-color: rgb(80, 160, 210);
 }
 
-.btn-login
+.btn-data
 {
-	margin: 5px;
+	background-color: transparent;
+}
+
+.btn-data:hover
+{
+	color: rgb(255, 255, 255);
+	background-color: rgb(80, 160, 210);
+}
+
+.btn-search-collapse
+{
+	text-decoration: none;
 	background-color: rgb(240, 160, 60);
 	color: rgb(255, 255, 255);
+	float: right;
+}
+
+.btn-collapse
+{
+	color: rgb(0, 0, 0);
+	background-color: rgb(255, 255, 255);
+	overflow: hidden;
 }
 
 .btn-menu
@@ -224,3 +231,14 @@ hr
 	color: rgb(255, 255, 255);
 }
 
+#transaction-list-container
+{
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden; /* Hide the horizontal scroll */
+}
+
+#transaction-list-head th, #transaction-list td
+{
+	text-align: center;
+}

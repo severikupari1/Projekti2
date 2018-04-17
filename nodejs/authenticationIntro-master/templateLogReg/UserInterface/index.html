@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fi">
 	<head>
@@ -14,9 +15,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		
 		<!-- Bootstrap 3.3.7 -->
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
 		<!-- custom CSS -->
 		<link rel="stylesheet" type="text/css" href="styles/styles.css">
@@ -25,7 +26,7 @@
 		<script src="scripts/script.js"></script>
 		
 		<!-- fonts -->
-		<link href="//fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 		
 		<!-- favicons -->
 		<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
@@ -61,32 +62,18 @@
 						
 						<!-- buttons for > xs -->
 						<button onclick="LoadPage('page-transaction')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-envelope nav-glyph"></span> Transaktio</button>
-						<button onclick="LoadPage('page-chain')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-list-alt nav-glyph"></span> Haku</button>
+						<button onclick="LoadPage('page-chain')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-list-alt nav-glyph"></span> Lohkoketju</button>
 						<button onclick="LoadPage('page-user')" class="btn btn-nav hidden-xs"><span class="glyphicon glyphicon-user nav-glyph"></span> Hallitse tiliä</button>
-						<button onclick="Logout()" class="btn btn-nav hidden-xs" title="Kirjaudu ulos"><span class="glyphicon glyphicon-log-out nav-glyph"></span></button>
 						
 						<!-- buttons for <= xs -->
 						<button onclick="LoadPage('page-transaction')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-envelope nav-glyph"></span> Transaktio</button>
-						<button onclick="LoadPage('page-chain')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-list-alt nav-glyph"></span> Haku</button>
+						<button onclick="LoadPage('page-chain')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-list-alt nav-glyph"></span> Lohkoketju</button>
 						<button onclick="LoadPage('page-user')" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-user nav-glyph"></span> Hallitse tiliä</button>
-						<button onclick="Logout()" class="btn btn-xs-nav visible-xs"><span class="glyphicon glyphicon-log-out nav-glyph"></span> Kirjaudu ulos</button>
 					</div>
 				</div>
 			</nav>
 		</div>
 		<!-- end navbar -->
-		
-		<!-- content -->
-		<!-- login page -->
-		<div id="page-login" class="container">
-			<h2>Kirjaudu sisään, ole hyvä:</h2>
-			
-			<input id="login-username" class="form-control login-input" type="text" placeholder="Kirjautumistunnus">
-			
-			<input id="login-password" class="form-control login-input" type="password" placeholder="Salasana">
-			<button class="btn btn-login" onclick="Login()">Kirjaudu sisään</button>
-		</div>
-		<!-- end login page -->
 		
 		<!-- frontpage -->
 		<div id="page-front" class="container">
@@ -94,11 +81,9 @@
 			
 			<button onclick="LoadPage('page-transaction')" class="btn btn-menu"><span class="glyphicon glyphicon-envelope"></span> Transaktio</button>
 			<br />
-			<button onclick="LoadPage('page-chain')" class="btn btn-menu"><span class="glyphicon glyphicon-list-alt"></span> Haku</button>
+			<button onclick="LoadPage('page-chain')" class="btn btn-menu"><span class="glyphicon glyphicon-list-alt"></span> Lohkoketju</button>
 			<br />
 			<button onclick="LoadPage('page-user')" class="btn btn-menu"><span class="glyphicon glyphicon-user"></span> Hallitse tiliä</button>
-			<br />
-			<button onclick="Logout()" class="btn btn-menu"><span class="glyphicon glyphicon-log-out"></span> Kirjaudu ulos</button>
 		</div>
 		<!-- end frontpage -->
 		
@@ -130,65 +115,93 @@
 		
 		<!-- view chain page -->
 		<div id="page-chain" class="container">
-			<h2 class="text-center">Haku</h2>
+			<h2 class="text-center">Lohkoketju <span><a class="btn btn-search-collapse" data-toggle="collapse" href="#search-collapse" title="Näytä tai piilota hakuehdot">Hakuehdot</a></span></h2>
 			<hr />
 			<!-- Search -->
-			<div class="row">
-				<div class="col-sm-4">
-					<p>Tuotteen avain</p>
-					<input id="search" type="text" class="form-control" placeholder="Hae tuotetunnuksella">
+			<div id="search-collapse" class="collapse">
+				<div class="row">
+					<div class="col-sm-4">
+						<p class="text-center">Lähettäjä</p>
+						<select id="search-sender" class="form-control" onchange="SearchBySender()" placeholder="Valitse lähettäjä"></select>
+					</div>
+					<div class="col-sm-4">
+						<p class="text-center">Vastaanottaja</p>
+						<select id="search-receiver" class="form-control" onchange="SearchByReceiver()" placeholder="Valitse vastaanottaja"></select>
+					</div>
+					<div class="col-sm-4">
+						<p class="text-center">Tuotteen avain</p>
+						<select id="search-product" class="form-control" onchange="SearchByProduct()" placeholder="Valitse lähettäjä"></select>
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<p>Lähettäjä</p>
-					<select id="sender" class="form-control" placeholder="Valitse lähettäjä">
-						<option value="1">ID 1</option>
-						<option value="2">ID 2</option>
-						<option value="3">ID 3</option>
-					</select>
+				<hr />
+				<div class="row">
+					<div class="col-sm-12">
+						<p class="text-center">Hae työkuvauksella:</p>
+						<input id="search-work" type="text" class="form-control" placeholder="Kirjoita työkuvaus" onchange="SearchByWork()">
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<p>Vastaanottaja</p>
-					<select id="receiver" class="form-control" placeholder="Valitse vastaanottaja">
-						<option value="1">ID 1</option>
-						<option value="2">ID 2</option>
-						<option value="3">ID 3</option>
-					</select>
+				<hr />
+				<div class="row">
+					<p class="text-center">Hae päivämäärällä</p>
+					<div class="col-sm-6">
+						Min: <input class="form-control" type="date" id="search-date-min" placeholder="Min päivämäärä" onchange="SearchByTime()">
+					</div>
+					<div class="col-sm-6">
+						Max: <input class="form-control" type="date" id="search-date-max" placeholder="Max päivämäärä" onchange="SearchByTime()">
+					</div> 
 				</div>
+				<hr />
 			</div>
 			<!-- end Search -->
 			
 			<!-- Search results -->
-			<h3>Transaktiot<span><button class="btn btn-clear pull-right" onclick="ClearResults()">Tyhjennä</button></span></h3>
+			<h3>Transaktiot<span><button class="btn btn-refresh pull-right" onclick="Refresh()">Päivitä</button></span></h3>
+			<p id="search-title">Kaikki transaktiot:</p>
 			<br />
-			<button id="painike">Testi nappula</button>
-			<div class="table-responsive">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th><button class="btn btn-sort" onclick="SortByID()">ID <span id="sort-id-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-						<th><button class="btn btn-sort" onclick="SortByBlock()">Lohko <span id="sort-block-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-						<th><button class="btn btn-sort" onclick="SortBySender()">Lähettäjä <span id="sort-sender-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-						<th><button class="btn btn-sort" onclick="SortByReceiver()">Vastaanottaja <span id="sort-receiver-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-						<th><button class="btn btn-sort" onclick="SortByProduct()">Tuote <span id="sort-product-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-						<th><button class="btn btn-sort" onclick="SortByWork()">Työ <span id="sort-work-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-						<th><button class="btn btn-sort" onclick="SortByTime()">Aika <span id="sort-time-glyph" class="glyphicon glyphicon-sort"></span></button></th>
-					</tr>
-				</thead>
-				<tbody id="transaction-list">
-					<tr id="t-[ID]">
-						<td><button class="btn" onclick="SearchByID('j3823k')">j3823k</button></td>
-						<td><button class="btn" onclick="SearchByBlock('234mk3')">234mk3</button></td>
-						<td><button class="btn" onclick="SearchBySender('gl03ik')">gl03ik - Einari Koponen</button></td>
-						<td><button class="btn" onclick="SearchByReceiver('4m3o23')">4m3o23 - Veijo Rehmaala</button></td>
-						<td><button class="btn" onclick="SearchByProduct('m4i39s')">m4i39s</button></td>
-						<td><button class="btn" onclick="SearchByWork('Hitsausta ja sen sellasta')">Hitsausta ja sen sellasta</button></td>
-						<td><button class="btn" onclick="SearchByTime(20180404)">04.04.2018</button></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
+			<div id="transaction-list-container">
+				<table class="table table-hover transaction-table">
+					<thead id="transaction-list-head">
+						<!-- NAPIT SORT FUNKTIOILLA
+						
+						<tr class="hidden-xs">
+							<th><button class="btn btn-sort" onclick="SortByID()">ID <span id="sort-id-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+							<th><button class="btn btn-sort" onclick="SortByBlock()">Lohko <span id="sort-block-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+							<th><button class="btn btn-sort" onclick="SortBySender()">Lähettäjä <span id="sort-sender-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+							<th><button class="btn btn-sort" onclick="SortByReceiver()">Vastaanottaja <span id="sort-receiver-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+							<th><button class="btn btn-sort" onclick="SortByProduct()">Tuote <span id="sort-product-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+							<th><button class="btn btn-sort" onclick="SortByWork()">Työ <span id="sort-work-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+							<th><button class="btn btn-sort" onclick="SortByTime()">Aika <span id="sort-time-glyph" class="glyphicon glyphicon-sort"></span></button></th>
+						</tr>-->
+						<tr class="hidden-xs">
+							<th>ID</th>
+							<th>Lohko</th>
+							<th>Lähettäjä</th>
+							<th>Vastaanottaja</th>
+							<th>Tuote</th>
+							<th>Työ</th>
+							<th>Aika</th>
+						</tr>
+					</thead>
+					<tbody id="transaction-list" class="hidden-xs"></tbody>
+					<div id="transaction-list-xs" class="visible-xs">
+						<a class="btn btn-collapse visible-xs" data-toggle="collapse" href="#t-collapse-123456">123456 | 234mk3 | gl03ik | 4m3o23 | 04.04.2018</a>
+						<div id="t-collapse-123456" class="collapse">
+							<p><button class="btn btn-data" onclick="SearchByID('123456')">123456</button></p>
+							<p><button class="btn btn-data" onclick="SearchByBlock('234mk3')">234mk3</button></p>
+							<p><button class="btn btn-data" onclick="SearchBySender('gl03ik')">gl03ik - Einari Koponen</button></p>
+							<p><button class="btn btn-data" onclick="SearchByReceiver('4m3o23')">4m3o23 - Veijo Rehmaala</button></p>
+							<p><button class="btn btn-data" onclick="SearchByProduct('m4i39s')">m4i39s</button></p>
+							<p><button class="btn btn-data" onclick="SearchByWork('Hitsausta ja sen sellasta')">Hitsausta ja sen sellasta</button></p>
+							<p><button class="btn btn-data" onclick="SearchByTime(20180404)">04.04.2018</button></p>
+						</div>
+					</div>
+				</table>
+			</div>
 			<!-- end Search results -->
+			
+			<!-- DEBUG table system -->
+			<div id="transaction-table"></div>
+			<!-- end table system -->
 			
 		<!--
 		Hakukenttä johon voi kirjottaa ja etsiä vaikkapa tuote ID perusteella

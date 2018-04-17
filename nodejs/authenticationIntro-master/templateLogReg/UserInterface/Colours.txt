@@ -1,3 +1,7 @@
-Background:	rgb(239, 239, 239)	#efefef		(extremely light gray as background, brings a softer look)
+Background:	rgb(239, 239, 239)	#efefef		(extremely light gray as background)
+
 Theme: 		rgb(80, 160, 210)	#50a0d2 	(theme colour is blue, can be used in large areas)
+
 Highlight: 	rgb(240, 160, 60) 	#f0a03c 	(highlight colour is orange, use in small areas that need attention)
+
+Warning:	rgb(200, 70, 50)	#C84632		(to be used in clear, delete and other warning buttons)
