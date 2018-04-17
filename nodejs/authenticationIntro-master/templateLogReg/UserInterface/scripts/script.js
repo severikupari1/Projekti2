@@ -9,9 +9,6 @@ document.addEventListener('DOMContentLoaded', function(){
 	$('#page-transaction').hide();
 	$('#page-chain').hide();
 	$('#page-user').hide();
-	
-	// GET JSON from db to UI at start, another call from refresh button at search?
-	Refresh();
 }, false);
 
 function LoadPage(name)
@@ -27,6 +24,13 @@ function LoadPage(name)
 	// Show page that was requested
 	$('#' + name).show();
 	currentPage = name;
+	
+	// If page is chain view page, load latest data
+	if (name == 'page-chain')
+	{
+		// GET JSON data
+		Refresh();
+	}
 	
 	console.log('currentPage new value is ' + currentPage);
 	console.log('LoadPage done!');
