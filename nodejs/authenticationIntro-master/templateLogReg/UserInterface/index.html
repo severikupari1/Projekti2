@@ -129,26 +129,9 @@
 						<select id="search-receiver" class="form-control" onchange="SearchByReceiver()" placeholder="Valitse vastaanottaja"></select>
 					</div>
 					<div class="col-sm-4">
-						<p class="text-center">Tuotteen avain</p>
-						<select id="search-product" class="form-control" onchange="SearchByProduct()" placeholder="Valitse lähettäjä"></select>
+						<p class="text-center">Määrä</p>
+						<select id="search-amount" class="form-control" onchange="SearchByProduct()" placeholder="Valitse määrä"></select>
 					</div>
-				</div>
-				<hr />
-				<div class="row">
-					<div class="col-sm-12">
-						<p class="text-center">Hae työkuvauksella:</p>
-						<input id="search-work" type="text" class="form-control" placeholder="Kirjoita työkuvaus" onchange="SearchByWork()">
-					</div>
-				</div>
-				<hr />
-				<div class="row">
-					<p class="text-center">Hae päivämäärällä</p>
-					<div class="col-sm-6">
-						Min: <input class="form-control" type="date" id="search-date-min" placeholder="Min päivämäärä" onchange="SearchByTime()">
-					</div>
-					<div class="col-sm-6">
-						Max: <input class="form-control" type="date" id="search-date-max" placeholder="Max päivämäärä" onchange="SearchByTime()">
-					</div> 
 				</div>
 				<hr />
 			</div>
@@ -173,13 +156,9 @@
 							<th><button class="btn btn-sort" onclick="SortByTime()">Aika <span id="sort-time-glyph" class="glyphicon glyphicon-sort"></span></button></th>
 						</tr>-->
 						<tr class="hidden-xs">
-							<th>ID</th>
-							<th>Lohko</th>
 							<th>Lähettäjä</th>
 							<th>Vastaanottaja</th>
-							<th>Tuote</th>
-							<th>Työ</th>
-							<th>Aika</th>
+							<th>Määrä</th>
 						</tr>
 					</thead>
 					<tbody id="transaction-list" class="hidden-xs"></tbody>

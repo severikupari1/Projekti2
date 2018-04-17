@@ -80,9 +80,9 @@ function GenerateSearchReceiverOptions()
 	$('#search-receiver').html(output)
 }
 
-function GenerateSearchProductOptions()
+function GenerateSearchAmountOptions()
 {
-	var output = '<option value="0">Valitse tuoteavain...</option>';
+	var output = '<option value="0">Valitse määrä...</option>';
 	var skipArray = new Array(1);
 	
 	// Loop through chainData and generate select options
@@ -90,7 +90,7 @@ function GenerateSearchProductOptions()
 	{
 		for (var d = 0; d < chainData[i].Transactions.length; d++)
 		{
-			var id = chainData[i].Transactions[d].Product;
+			var id = chainData[i].Transactions[d].Amount;
 			
 			// Check if id is in skipArray
 			if (!skipArray.includes(id))
@@ -101,7 +101,7 @@ function GenerateSearchProductOptions()
 		}
 	}
 	
-	$('#search-product').html(output)
+	$('#search-amount').html(output)
 }
 
 function SearchBySender(key = 0)
@@ -127,20 +127,16 @@ function SearchBySender(key = 0)
 		{
 			if (chainData[i].Transactions[d].Sender == key)
 			{
-				AddResultRow(chainData[i].Transactions[d].ID,
-				chainData[i].Transactions[d].Block,
-				chainData[i].Transactions[d].Sender,
-				chainData[i].Transactions[d].Receiver,
-				chainData[i].Transactions[d].Product,
-				chainData[i].Transactions[d].Work,
-				chainData[i].Transactions[d].Time);
+				AddResultRow(chainData[i].Transactions[d].Sender,
+				chainData[i].Transactions[d].Recipient,
+				chainData[i].Transactions[d].Amount);
 			}
 		}
 	}
 	
 	// Generate / flush options for form selects
 	GenerateSearchReceiverOptions();
-	GenerateSearchProductOptions();
+	GenerateSearchAmountOptions();
 	
 	// Flush values of work and date inputs
 	$("#search-work").val("");
@@ -173,30 +169,21 @@ function SearchByReceiver(key = 0)
 		{
 			if (chainData[i].Transactions[d].Receiver == key)
 			{
-				AddResultRow(chainData[i].Transactions[d].ID,
-				chainData[i].Transactions[d].Block,
-				chainData[i].Transactions[d].Sender,
-				chainData[i].Transactions[d].Receiver,
-				chainData[i].Transactions[d].Product,
-				chainData[i].Transactions[d].Work,
-				chainData[i].Transactions[d].Time);
+				AddResultRow(chainData[i].Transactions[d].Sender,
+				chainData[i].Transactions[d].Recipient,
+				chainData[i].Transactions[d].Amount);
 			}
 		}
 	}
 	
 	// Generate / flush options for form selects
 	GenerateSearchSenderOptions();
-	GenerateSearchProductOptions();
-	
-	// Flush values of work and date inputs
-	$("#search-work").val("");
-	$("#search-date-min").val("");
-	$("#search-date-max").val("");
+	GenerateSearchAmountOptions();
 	
 	$("#search-title").html("Tulokset vastaanottajalla: " + key);
 }
 
-function SearchByProduct(key = 0)
+function SearchByAmount(key = 0)
 {
 	// Get key from option value when key is NULL, meaning it was called from onchange
 	if (key == 0)
@@ -217,15 +204,11 @@ function SearchByProduct(key = 0)
 	{
 		for (var d = 0; d < chainData[i].Transactions.length; d++)
 		{
-			if (chainData[i].Transactions[d].Product == key)
+			if (chainData[i].Transactions[d].Amount == key)
 			{
-				AddResultRow(chainData[i].Transactions[d].ID,
-				chainData[i].Transactions[d].Block,
-				chainData[i].Transactions[d].Sender,
-				chainData[i].Transactions[d].Receiver,
-				chainData[i].Transactions[d].Product,
-				chainData[i].Transactions[d].Work,
-				chainData[i].Transactions[d].Time);
+				AddResultRow(chainData[i].Transactions[d].Sender,
+				chainData[i].Transactions[d].Recipient,
+				chainData[i].Transactions[d].Amount);
 			}
 		}
 	}
@@ -234,119 +217,7 @@ function SearchByProduct(key = 0)
 	GenerateSearchSenderOptions();
 	GenerateSearchReceiverOptions();
 	
-	// Flush values of work and date inputs
-	$("#search-work").val("");
-	$("#search-date-min").val("");
-	$("#search-date-max").val("");
-	
-	$("#search-title").html("Tulokset tuotteella: " + key);
-}
-
-function SearchByWork(key = 0)
-{
-	// Get key from option value when key is NULL, meaning it was called from onchange
-	if (key == 0)
-	{
-		// Only search by text input if the length is over 1.
-		if ($('input#search-work').val().length > 1)
-		{
-			key = $('input#search-work').val();
-		}
-		else
-		{
-			JsonToDataTable();
-			return;
-		}
-	}
-	
-	ClearResults();
-	
-	// Show only chainData records containing the selected key
-	for (var i = 0; i < chainData.length; i++)
-	{
-		for (var d = 0; d < chainData[i].Transactions.length; d++)
-		{
-			if (chainData[i].Transactions[d].Work.toLowerCase() == key.toLowerCase())
-			{
-				AddResultRow(chainData[i].Transactions[d].ID,
-				chainData[i].Transactions[d].Block,
-				chainData[i].Transactions[d].Sender,
-				chainData[i].Transactions[d].Receiver,
-				chainData[i].Transactions[d].Product,
-				chainData[i].Transactions[d].Work,
-				chainData[i].Transactions[d].Time);
-			}
-		}
-	}
-	
-	// Generate / flush options for form selects
-	GenerateSearchSenderOptions();
-	GenerateSearchReceiverOptions();
-	GenerateSearchProductOptions();
-	
-	// Flush values of work and date inputs
-	$("#search-work").val("");
-	$("#search-date-min").val("");
-	$("#search-date-max").val("");
-	
-	$("#search-title").html("Tulokset työkuvauksella: " + key);
-}
-
-function SearchByTime(key = 0)
-{
-	// Get key from option value when key is NULL, meaning it was called from onchange
-	if (key == 0)
-	{
-		// If not defined, min date is 01.01.1900
-		if ($('#search-date-min').val().length < 1) min = new Date('1900-01-01');
-		else min = new Date($('#search-date-min').val());
-		
-		// If not defined, max date is now
-		if ($('#search-date-max').val().length < 1) max = new Date();
-		else max = new Date($('#search-date-max').val());
-	}
-	
-	else
-	{
-		var keyArr = key.split(".");
-		var min = max = new Date(keyArr[1] + "/" + keyArr[0] + "/" + keyArr[2]);
-	}
-
-	
-	ClearResults();
-	
-	for (var i = 0; i < chainData.length; i++)
-	{
-		for (var d = 0; d < chainData[i].Transactions.length; d++)
-		{
-			var dateArr = chainData[i].Transactions[d].Time.split(".")
-			var transactionTime = new Date(dateArr[1] + "/" + dateArr[0] + "/" + dateArr[2]);
-			
-			if (transactionTime >= min && transactionTime <= max)
-			{
-				AddResultRow(chainData[i].Transactions[d].ID,
-				chainData[i].Transactions[d].Block,
-				chainData[i].Transactions[d].Sender,
-				chainData[i].Transactions[d].Receiver,
-				chainData[i].Transactions[d].Product,
-				chainData[i].Transactions[d].Work,
-				chainData[i].Transactions[d].Time);
-			}
-		}
-	}
-	
-	// Generate / flush options for form selects
-	GenerateSearchSenderOptions();
-	GenerateSearchReceiverOptions();
-	GenerateSearchProductOptions();
-	
-	// Flush values of work and date inputs
-	$("#search-work").val("");
-	
-	var minDateString = min.getDate() + "." + (min.getMonth()+1) + "." + min.getFullYear();
-	var maxDateString = max.getDate() + "." + (max.getMonth()+1) + "." + max.getFullYear();
-	
-	$("#search-title").html("Tulokset aikaväliltä: " + minDateString + " - " + maxDateString);
+	$("#search-title").html("Tulokset määrällä: " + key);
 }
 
 function JsonToDataTable()
@@ -362,19 +233,15 @@ function JsonToDataTable()
 	{
 		for (var d = 0; d < chainData[i].Transactions.length; d++)
 		{
-			AddResultRow(chainData[i].Transactions[d].ID,
-			chainData[i].Transactions[d].Block,
-			chainData[i].Transactions[d].Sender,
-			chainData[i].Transactions[d].Receiver,
-			chainData[i].Transactions[d].Product,
-			chainData[i].Transactions[d].Work,
-			chainData[i].Transactions[d].Time);
+			AddResultRow(chainData[i].Transactions[d].Sender,
+			chainData[i].Transactions[d].Recipient,
+			chainData[i].Transactions[d].Amount);
 		}
 	}
 	console.log('JsonToDataTable done!');
 }
 
-function AddResultRow(ID, Block, Sender, Receiver, Product, Work, Time)
+function AddResultRow(Sender, Receiver, Amount)
 {
 	var tranList = $('#transaction-list');
 	var transactions = tranList.html();
@@ -382,26 +249,14 @@ function AddResultRow(ID, Block, Sender, Receiver, Product, Work, Time)
 	console.log('AddResultRow started...');
 	console.log('Transaction ID: ' + ID);
 	
-	// Add ID field in row
-	output += '<td><button class="btn btn-data" onclick="SearchByID(\'' + ID + '\')" title="Hae transaktion tunnuksella">' + ID + '</button></td>';
-	
-	// Add Block field in row
-	output += '<td><button class="btn btn-data" onclick="SearchByBlock(\'' + Block + '\')" title="Hae lohkon tunnuksella">' + Block + '</button></td>';
-	
 	// Add Sender field in row
 	output += '<td><button class="btn btn-data" onclick="SearchBySender(\'' + Sender + '\')" title="Hae lähettäjän tunnuksella">' + Sender + '</button></td>';
 	
 	// Add Receiver field in row
 	output += '<td><button class="btn btn-data" onclick="SearchByReceiver(\'' + Receiver + '\')" title="Hae vastaanottajan tunnuksella">' + Receiver + '</button></td>';
 	
-	// Add Product field in row
-	output += '<td><button class="btn btn-data" onclick="SearchByProduct(\'' + Product + '\')" title="Hae tuotetunnuksella">' + Product + '</button></td>';
-	
-	// Add Work field in row
-	output += '<td><button class="btn btn-data" onclick="SearchByWork(\'' + Work + '\')" title="Hae työkuvauksen perusteella">' + Work + '</button></td>';
-	
-	// Add Time field in row
-	output += '<td><button class="btn btn-data" onclick="SearchByTime(\'' + Time + '\')" title="Hae transaktion ajan perusteella">' + Time + '</button></td>';
+	// Add Amount field in row
+	output += '<td><button class="btn btn-data" onclick="SearchByAmount(\'' + Amount + '\')" title="Hae määrällä">' + Amount + '</button></td>';
 	
 	console.log('output to be added: ' + output);
 	
@@ -439,12 +294,7 @@ function Refresh()
 	// Generate options for form selects
 	GenerateSearchSenderOptions();
 	GenerateSearchReceiverOptions();
-	GenerateSearchProductOptions();
-	
-	// Flush values of work and date inputs
-	$("#search-work").val("");
-	$("#search-date-min").val("");
-	$("#search-date-max").val("");
+	GenerateSearchAmountOptions();
 	
 	// Reset search title
 	$("#search-title").html("Kaikki transaktiot:");
