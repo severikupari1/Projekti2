@@ -92,24 +92,20 @@
 			<h2>Uusi transaktio</h2>
 			<hr />
 			<div class="row">
-				<div class="col-sm-4">
-					<img id="transaction-product-img" src="#" alt="">
-				</div>
-				
-				<div class="col-sm-4">
-					<p>Tuote:</p>
-					<input id="transaction-product" class="form-control transaction-input" type="text" placeholder="Tuotteen ID">
+				<div class="col-sm-12">
+					<p>Lähettäjä:</p>
+					<input id="transaction-sender" class="form-control transaction-input" type="text" placeholder="Lähettäjän ID">
 					<br />
 					<p>Vastaanottaja:</p>
-					<input id="login-password" class="form-control transaction-input" type="text" placeholder="Vastaanottajan ID">
-				</div>
-				
-				<div class="col-sm-4">
-					<p>Työ:</p>
-					<textarea id="transaction-work" class="form-control transaction-input"  placeholder="Kuvaus tehdystä työstä, tässä voi olla myös alasvetovalikko"></textarea>
+					<input id="transaction-receiver" class="form-control transaction-input" type="text" placeholder="Vastaanottajan ID">
+					<br />
+					<p>Määrä:</p>
+					<input id="transaction-amount" class="form-control transaction-input" type="text" placeholder="Määrä">
 				</div>
 			</div>
-			<button class="btn btn-transaction" onclick="Login()">Tallenna</button>
+			<button class="btn btn-transaction" onclick="NewTransaction()">Tallenna</button>
+			<br />
+			<p id="transaction-result"></p>
 		</div>
 		<!-- end transaction page -->
 		

@@ -1,5 +1,7 @@
 // Global variable for storing the current page the user is viewing at the moment.
 var currentPage = 'page-front';
+
+// Blockchain data is global, functions except Refresh should not change the data
 var chainData = '';
 
 //Run when the page loads
@@ -34,6 +36,36 @@ function LoadPage(name)
 	
 	console.log('currentPage new value is ' + currentPage);
 	console.log('LoadPage done!');
+}
+
+function NewTransaction()
+{
+	$('#transaction-result').html("Lähetetään tietoja...");
+	
+	var sender = $('#transaction-sender').val();
+	var receiver = $('#transaction-receiver').val();
+	var amount = $('#transaction-amount').val();
+	
+	var data =
+	{
+		"Amount":Number(amount),
+		"Recipient":receiver,
+		"Sender":sender
+	};
+	
+	var jsonstring = JSON.stringify(data);
+	
+	$.ajax({
+		crossorigin:true,
+		type: "POST",
+		url: "http://localhost:12345/transactions/new",
+		data: jsonstring,
+		success: function(){
+			$('#transaction-result').html("Transaktio tallennettu!");
+		},
+		dataType: "json",
+	});
+
 }
 
 function GenerateSearchSenderOptions()
