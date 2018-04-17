@@ -280,6 +280,7 @@ function Refresh()
 
 		success: function (data) {
 			
+			console.log(data);
 			var blockchainData = JSON.stringify(data);
 			chainData = blockchainData.chain;
 			console.log(chainData);
