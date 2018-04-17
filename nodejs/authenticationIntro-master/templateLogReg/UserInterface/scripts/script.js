@@ -282,7 +282,7 @@ function Refresh()
 		success: function (data) {
 			
 			var blockchainData = JSON.stringify(data);
-			chainData = blockchainData.chain;
+			chainData = blockchainData[2];
 			console.log(chainData);
 		},
 		dataType: "json",
