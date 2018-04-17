@@ -4,7 +4,7 @@ var login = false;
 $(document).ready(function () {
 	console.log("ready!");
 
-	$( "#haku" ).click(function() {
+	$( "#painike" ).click(function() {
 		$.ajax({
 
 			type: "GET",
@@ -13,7 +13,7 @@ $(document).ready(function () {
 			success: function (data) {
 				
 				var kokochain = JSON.stringify(data);
-				
+				console.log(kokochain);
 			},
 			dataType: "json",
 
