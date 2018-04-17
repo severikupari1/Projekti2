@@ -1,6 +1,27 @@
 var currentPage = 'page-login';
 var login = false;
 
+$(document).ready(function () {
+	console.log("ready!");
+
+	$( "#haku" ).click(function() {
+		$.ajax({
+
+			type: "GET",
+			url: "http://10.211.48.117:3000/chain1",
+	
+			success: function (data) {
+				
+				var kokochain = JSON.stringify(data);
+				
+			},
+			dataType: "json",
+
+		});
+	  });
+});
+
+
 //Run when the page loads
 document.addEventListener('DOMContentLoaded', function(){
 	
