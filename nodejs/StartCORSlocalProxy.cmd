@@ -1,1 +1,1 @@
-node.exe node_modules\cors-anywhere
+node.exe node_modules\cors-anywhere\server.js
