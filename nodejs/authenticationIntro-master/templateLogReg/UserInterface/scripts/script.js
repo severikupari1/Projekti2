@@ -4,6 +4,25 @@ var currentPage = 'page-front';
 // Blockchain data is global, functions except Refresh should not change the data
 var chainData = '';
 
+$( document ).ready(function() {
+    $("#mine").click(function (){
+		$.ajax({
+		
+			type: "GET",
+			url: "http://localhost:8080/http://10.211.48.117:12345/testi",
+			
+			success: function(data1){
+				console.log(data1);
+				$('#mine').html("lohko luotu tallennettu!");
+				//$('#transaction-result').html(data);
+				
+			},
+			dataType: "json",
+		});
+	});
+});
+
+
 //Run when the page loads
 document.addEventListener('DOMContentLoaded', function(){
 	
@@ -15,13 +34,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function LoadPage(name)
 {
-	console.log('LoadPage started...');
-	console.log('Hiding current page: ' + currentPage);
+	//console.log('LoadPage started...');
+	//console.log('Hiding current page: ' + currentPage);
 	
 	// Hide previous page
 	$('#' + currentPage).hide();
 	
-	console.log('Showing new page: ' + name);
+	//console.log('Showing new page: ' + name);
 	
 	// Show page that was requested
 	$('#' + name).show();
@@ -34,8 +53,8 @@ function LoadPage(name)
 		Refresh();
 	}
 	
-	console.log('currentPage new value is ' + currentPage);
-	console.log('LoadPage done!');
+	//console.log('currentPage new value is ' + currentPage);
+	//console.log('LoadPage done!');
 }
 
 function NewTransaction()
@@ -58,13 +77,17 @@ function NewTransaction()
 	$.ajax({
 		crossorigin:true,
 		type: "POST",
-		url: "http://10.211.48.117:12345/transactions/new",
+		url: "http://localhost:8080/http://10.211.48.117:12345/transactions/new",
 		data: jsonstring,
 		success: function(){
-			$('#transaction-result').html("Transaktio tallennettu!");
+			//$('#transaction-result').html("Transaktio tallennettu!");
+			//$('#transaction-result').html(data);
 		},
 		dataType: "json",
 	});
+
+	
+	
 
 }
 
@@ -258,9 +281,9 @@ function SearchByAmount(key = 0)
 
 function JsonToDataTable()
 {
-	console.log('JsonToDataTable started...');
+	//console.log('JsonToDataTable started...');
 	
-	console.log('chainData: ' + chainData);	
+	//console.log('chainData: ' + chainData);	
 	
 	// Call a function to clear the search results before outputting new ones
 	ClearResults();
@@ -274,7 +297,7 @@ function JsonToDataTable()
 			chainData[i].Transactions[d].Amount);
 		}
 	}
-	console.log('JsonToDataTable done!');
+	//console.log('JsonToDataTable done!');
 }
 
 function AddResultRow(Sender, Receiver, Amount)
@@ -282,7 +305,7 @@ function AddResultRow(Sender, Receiver, Amount)
 	var tranList = $('#transaction-list');
 	var transactions = tranList.html();
 	var output = '<tr id="transaction-row">';
-	console.log('AddResultRow started...');
+	//console.log('AddResultRow started...');
 	
 	// Add Sender field in row
 	output += '<td><button class="btn btn-data" onclick="SearchBySender(\'' + Sender + '\')" title="Hae lähettäjän tunnuksella">' + Sender + '</button></td>';
@@ -293,17 +316,17 @@ function AddResultRow(Sender, Receiver, Amount)
 	// Add Amount field in row
 	output += '<td><button class="btn btn-data" onclick="SearchByAmount(\'' + Amount + '\')" title="Hae määrällä">' + Amount + '</button></td>';
 	
-	console.log('output to be added: ' + output);
+	//console.log('output to be added: ' + output);
 	
 	tranList.html(transactions + output);
-	console.log('AddResultRow done!');
+	//console.log('AddResultRow done!');
 }
 
 function ClearResults()
 {
-	console.log('ClearResults started...');
+	//console.log('ClearResults started...');
 	$('#transaction-list').html("");
-	console.log('ClearResults done!');
+	//console.log('ClearResults done!');
 }
 
 function Refresh()
@@ -311,6 +334,9 @@ function Refresh()
 	$("#search-title").html("Haetaan transaktioita...");
 	
 	// Get chain data from database
+	
+
+
 	$.ajax({
 		
 		type: "GET",
@@ -318,9 +344,9 @@ function Refresh()
 
 		success: function (data) {
 			
-			console.log(data);
+			//console.log(data);
 			chainData = data.chain;
-			console.log(chainData);
+			//console.log(chainData);
 			
 			// Generate table from blockchain data for chain view page
 			JsonToDataTable();
@@ -336,4 +362,7 @@ function Refresh()
 		dataType: "json",
 
 	});
+
+	
+
 }

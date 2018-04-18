@@ -103,10 +103,12 @@ namespace BlockChainDemo
             var settings = ConfigurationManager.AppSettings;
             string host = settings["host"]?.Length > 1 ? settings["host"] : "localhost";
             string port = settings["port"]?.Length > 1 ? settings["port"] : "12345";
-
+            
             var server = new TinyWebServer.WebServer(request =>
                 {
-
+                    // HttpContent testi;
+                    //request.Headers.Set("Access-Control-Allow-Origin", "*");
+                    //request.Headers.Add("Access-Control-Allow-Origin", "*");
                     string path = request.Url.PathAndQuery.ToLower();
                     string query = "";
                     string json = "";
@@ -127,18 +129,21 @@ namespace BlockChainDemo
                         //POST: http://localhost:12345/transactions/new
                         //{ "Amount":123, "Recipient":"ebeabf5cc1d54abdbca5a8fe9493b479", "Sender":"31de2e0ef1cb4937830fcfd5d2b3b24f" }
                         case "/transactions/new":
+                           
+
+
                             if (request.HttpMethod != HttpMethod.Post.Method)
                                 return $"{new HttpResponseMessage(HttpStatusCode.MethodNotAllowed)}";
-
+                            
                             json = new StreamReader(request.InputStream).ReadToEnd();
                             Transaction trx = JsonConvert.DeserializeObject<Transaction>(json);
                             int blockId = chain.CreateTransaction(trx.Sender, trx.Recipient, trx.Amount);
-
-                            var s = chain.GetFullChain();
-                            System.Console.WriteLine(s);
-
-                            System.IO.File.WriteAllText("file.json", s);
-                            FindAndSave(chain);
+                           
+                            //var s = chain.GetFullChain();
+                           // System.Console.WriteLine(s);
+                           
+                            //System.IO.File.WriteAllText("file.json", s);
+                            //FindAndSave(chain);
                             return $"Your transaction will be included in block {blockId}";
 
                         //GET: http://localhost:12345/chain
@@ -150,7 +155,8 @@ namespace BlockChainDemo
                         case "/nodes/register":
                             if (request.HttpMethod != HttpMethod.Post.Method)
                                 return $"{new HttpResponseMessage(HttpStatusCode.MethodNotAllowed)}";
-
+                            //request.Headers.Add("Access-Control-Allow-Origin", "*");
+                            
                             json = new StreamReader(request.InputStream).ReadToEnd();
                             var urlList = new { Urls = new string[0] };
                             var obj = JsonConvert.DeserializeAnonymousType(json, urlList);
@@ -161,7 +167,8 @@ namespace BlockChainDemo
                             return chain.Consensus();
 
                         case "/tallenna":
-                            InsertToDatabase(chain).Wait();
+                            //InsertToDatabase(chain).Wait();
+                            FindAndSave(chain);
                             return "Tallennettiin tietokantaan";
 
                         case "/testi":

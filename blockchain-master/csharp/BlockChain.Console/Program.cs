@@ -48,8 +48,10 @@ namespace BlockChainDemo.Console
             var document = BsonSerializer.Deserialize<BsonDocument>(hakuchaini);
 
             var kokochain = new BlockChain(document);
+            //var kokochain = new BlockChain();
 
             var server = new WebServer(kokochain);
+            //var server = new WebServer();
 
             System.Console.WriteLine(kokochain.GetFullChain());
 
