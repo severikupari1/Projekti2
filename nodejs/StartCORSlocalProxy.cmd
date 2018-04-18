@@ -1,0 +1,1 @@
+node.exe node_modules\cors-anywhere
