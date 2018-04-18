@@ -66,3 +66,14 @@ C:\projekti2\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\Blo
 C:\projekti2\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe
 C:\projekti2\Projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.pdb
 C:\projekti2\Projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.CopyComplete
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csprojResolveAssemblyReference.cache
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.BlockChainDemo.Console.exe.config
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChain.Console.csproj.CoreCompileInputs.cache
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.exe
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.pdb
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe.config
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.pdb
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.dll
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\TinyWebServer.dll
+C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.pdb
