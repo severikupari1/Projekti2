@@ -11,18 +11,23 @@ using System.Net.Http;
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace BlockChainDemo.Console
 {
 
     class Program
     {
+        
 
-       
 
 
         static void Main(string[] args)
         {
+            
+           // System.Console.WriteLine(host);
+
             var Client = new MongoClient(new MongoUrl("mongodb://projekti2:Bloblo1@ds237669.mlab.com:37669/projekti2"));
             var DB = Client.GetDatabase("projekti2");
             var collection = DB.GetCollection<BsonDocument>("chain");

@@ -8,7 +8,10 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading.Tasks;
+
 
 namespace BlockChainDemo
 {
@@ -94,15 +97,88 @@ namespace BlockChainDemo
         }
 
 
+      
+
+        static void AddUpdateAppSettings(string key, string value)
+        {
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings[key] == null)
+                {
+                    settings.Add(key, value);
+                }
+                else
+                {
+                    settings[key].Value = value;
+                }
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+        }
+
+        static void ReadAllSettings()
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+
+                if (appSettings.Count == 0)
+                {
+                    Console.WriteLine("AppSettings is empty.");
+                }
+                else
+                {
+                    foreach (var key in appSettings.AllKeys)
+                    {
+                        Console.WriteLine("Key: {0} Value: {1}", key, appSettings[key]);
+                    }
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
+        }
+
+        public static string GetLocalIPv4(NetworkInterfaceType _type)
+        {
+            string output = "";
+            foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (item.NetworkInterfaceType == _type && item.OperationalStatus == OperationalStatus.Up)
+                {
+                    foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            output = ip.Address.ToString();
+                        }
+                    }
+                }
+            }
+            return output;
+        }
+
 
 
 
 
         public WebServer(BlockChain chain)
         {
+            ReadAllSettings();
+            AddUpdateAppSettings("host", GetLocalIPv4(NetworkInterfaceType.Ethernet));
             var settings = ConfigurationManager.AppSettings;
+            //ApplySettings("host", hosti);
             string host = settings["host"]?.Length > 1 ? settings["host"] : "localhost";
             string port = settings["port"]?.Length > 1 ? settings["port"] : "12345";
+            ReadAllSettings();
+            Console.ReadKey();
             
             var server = new TinyWebServer.WebServer(request =>
                 {
