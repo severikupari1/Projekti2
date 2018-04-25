@@ -77,10 +77,6 @@ C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDem
 C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.dll
 C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\TinyWebServer.dll
 C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.pdb
-C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.exe.manifest
-C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\BlockChainDemo.Console.application
-C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.exe.manifest
-C:\projekti2\blockchain-master\csharp\BlockChain.Console\obj\Debug\BlockChainDemo.Console.application
 C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\Microsoft.CSharp.dll
 C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\System.Data.DataSetExtensions.dll
 C:\projekti2\blockchain-master\csharp\BlockChain.Console\bin\Debug\System.Data.dll

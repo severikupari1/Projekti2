@@ -178,7 +178,7 @@ namespace BlockChainDemo
             string host = settings["host"]?.Length > 1 ? settings["host"] : "localhost";
             string port = settings["port"]?.Length > 1 ? settings["port"] : "12345";
             ReadAllSettings();
-            Console.ReadKey();
+            //Console.ReadKey();
             
             var server = new TinyWebServer.WebServer(request =>
                 {

@@ -59,13 +59,16 @@
     <ManifestKeyFile>BlockChain.Console_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
