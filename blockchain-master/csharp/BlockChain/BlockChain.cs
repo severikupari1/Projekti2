@@ -176,7 +176,7 @@ namespace BlockChainDemo
         {
             int proof = CreateProofOfWork(_lastBlock.Proof, _lastBlock.PreviousHash);
 
-            CreateTransaction(sender: "0", recipient: NodeId, amount: 1);
+            //CreateTransaction(sender: "0", recipient: NodeId, amount: 1);
             Block block = CreateNewBlock(proof /*, _lastBlock.PreviousHash*/);
 
             var response = new

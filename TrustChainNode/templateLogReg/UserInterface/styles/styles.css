@@ -1,0 +1,244 @@
+html
+{
+	position: relative;
+	min-height: 100%;
+}
+
+body
+{
+	margin: 0 0 140px; /* footer height + whitespace */
+	background-color: rgb(239, 239, 239);
+}
+
+footer
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+    overflow: hidden;
+	width: 100%;
+	height: 100px;
+	
+	background-color: rgb(80, 160, 210);
+	color: rgb(255, 255, 255);
+	
+	background-image: url("../images/logo-bg-circle.png");
+	background-position: center;
+	background-size: 60px;
+	background-repeat: no-repeat;
+}
+
+footer a
+{
+	transition: color 0.5s ease;
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+}
+
+hr
+{
+	border-color: rgb(80, 160, 210);
+}
+
+.navbar
+{
+	margin: 0px;
+	background-color: rgb(80, 160, 210);
+	color: rgb(255, 255, 255);
+	border: 0px;
+}
+
+.navbar-default .navbar-toggle .icon-bar
+{
+    background-color: rgb(255, 255, 255);
+}
+
+.navbar-logo-area
+{
+	background-color: rgb(239, 239, 239);
+	display: inline-block;
+	max-height: 50px;
+	transform: skewX(20deg);
+	padding: 0px 15px;
+	margin: 0px 10px;
+}
+
+.navbar-logo
+{
+	max-height: 50px;
+	transform: skewX(-20deg);
+}
+
+.navbar-logo:hover
+{
+	-webkit-filter: drop-shadow(0px 0px 3px #bbb);
+	filter: drop-shadow(0px 0px 3px #bbb);
+}
+
+.navbar-xs-logo
+{
+	max-height: 50px;
+	margin-left: 10px;
+}
+
+.navbar-toggle
+{
+	background-color: rgb(240, 160, 60);
+}
+
+.navbar-default .navbar-toggle:hover
+{
+	background-color: rgb(220, 150, 50);
+}
+
+.btn-nav
+{
+	margin-left: 3px;
+	background-color: rgb(239, 239, 239);
+	color: rgb(0, 0, 0);
+}
+
+.btn-nav:hover
+{
+	background-color: rgb(255, 255, 255);
+}
+
+.btn-xs-nav
+{
+	text-align: center;
+	margin-bottom: 5px;
+	width: 100%;
+	background-color: rgb(239, 239, 239);
+	color: rgb(0, 0, 0);
+}
+
+.nav-glyph
+{
+	color: rgb(240, 160, 60);
+}
+
+#page-transaction
+{
+	text-align: center;
+	font-size: 18px;
+}
+
+.transaction-col
+{
+	text-align: left;
+}
+
+.transaction-input
+{
+	width: 260px;
+	height: 60px;
+	margin: 5px auto;
+	font-size: 20px;
+}
+
+#transaction-product-img
+{
+	background-color: rgb(230, 230, 230);
+	display: block;
+	margin: auto;
+	width: 250px;
+	height: 250px;
+	border: 1px solid rgb(80, 160, 210);
+}
+
+#transaction-work
+{
+	height: 200px;
+}
+
+#page-front
+{
+	text-align: center;
+}
+
+.btn-refresh
+{
+	color: rgb(255, 255, 255); 
+	background-color: rgb(80, 160, 210);
+}
+
+.btn-sort
+{
+	background-color: transparent;
+}
+
+.btn-sort:hover
+{
+	color: rgb(255, 255, 255);
+	background-color: rgb(80, 160, 210);
+}
+
+.btn-data
+{
+	background-color: transparent;
+}
+
+.btn-data:hover
+{
+	color: rgb(255, 255, 255);
+	background-color: rgb(80, 160, 210);
+}
+
+.btn-search-collapse
+{
+	text-decoration: none;
+	background-color: rgb(240, 160, 60);
+	color: rgb(255, 255, 255);
+	float: right;
+}
+
+.btn-collapse
+{
+	color: rgb(0, 0, 0);
+	background-color: rgb(255, 255, 255);
+	overflow: hidden;
+}
+
+.btn-menu
+{
+	font-size: 20px;
+	width: 200px;
+	margin: 5px;
+	background-color: rgb(80, 160, 210);
+	color: rgb(255, 255, 255);
+}
+
+.btn-transaction
+{
+	text-align: center;
+	font-size: 20px;
+	margin: 20px;
+	background-color: rgb(240, 160, 60);
+	color: rgb(255, 255, 255);
+	width: 200px;
+}
+
+.btn-footer
+{
+	margin: 0px;
+	background-color: rgb(80, 160, 210);
+	color: rgb(255, 255, 255);
+}
+
+.btn-footer:hover
+{
+	background-color: rgb(70, 150, 190);
+	color: rgb(255, 255, 255);
+}
+
+#transaction-list-container
+{
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden; /* Hide the horizontal scroll */
+}
+
+#transaction-list-head th, #transaction-list td
+{
+	text-align: center;
+}

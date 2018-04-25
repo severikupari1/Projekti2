@@ -8,7 +8,10 @@ using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 using System.Threading.Tasks;
+
 
 namespace BlockChainDemo
 {
@@ -94,19 +97,94 @@ namespace BlockChainDemo
         }
 
 
+      
+
+        static void AddUpdateAppSettings(string key, string value)
+        {
+            try
+            {
+                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                var settings = configFile.AppSettings.Settings;
+                if (settings[key] == null)
+                {
+                    settings.Add(key, value);
+                }
+                else
+                {
+                    settings[key].Value = value;
+                }
+                configFile.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error writing app settings");
+            }
+        }
+
+        static void ReadAllSettings()
+        {
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
+
+                if (appSettings.Count == 0)
+                {
+                    Console.WriteLine("AppSettings is empty.");
+                }
+                else
+                {
+                    foreach (var key in appSettings.AllKeys)
+                    {
+                        Console.WriteLine("Key: {0} Value: {1}", key, appSettings[key]);
+                    }
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                Console.WriteLine("Error reading app settings");
+            }
+        }
+
+        public static string GetLocalIPv4(NetworkInterfaceType _type)
+        {
+            string output = "";
+            foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (item.NetworkInterfaceType == _type && item.OperationalStatus == OperationalStatus.Up)
+                {
+                    foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            output = ip.Address.ToString();
+                        }
+                    }
+                }
+            }
+            return output;
+        }
+
 
 
 
 
         public WebServer(BlockChain chain)
         {
+            ReadAllSettings();
+            AddUpdateAppSettings("host", GetLocalIPv4(NetworkInterfaceType.Ethernet));
             var settings = ConfigurationManager.AppSettings;
+            //ApplySettings("host", hosti);
             string host = settings["host"]?.Length > 1 ? settings["host"] : "localhost";
             string port = settings["port"]?.Length > 1 ? settings["port"] : "12345";
-
+            ReadAllSettings();
+            //Console.ReadKey();
+            
             var server = new TinyWebServer.WebServer(request =>
                 {
-
+                    // HttpContent testi;
+                    //request.Headers.Set("Access-Control-Allow-Origin", "*");
+                    //request.Headers.Add("Access-Control-Allow-Origin", "*");
                     string path = request.Url.PathAndQuery.ToLower();
                     string query = "";
                     string json = "";
@@ -127,18 +205,21 @@ namespace BlockChainDemo
                         //POST: http://localhost:12345/transactions/new
                         //{ "Amount":123, "Recipient":"ebeabf5cc1d54abdbca5a8fe9493b479", "Sender":"31de2e0ef1cb4937830fcfd5d2b3b24f" }
                         case "/transactions/new":
+                           
+
+
                             if (request.HttpMethod != HttpMethod.Post.Method)
                                 return $"{new HttpResponseMessage(HttpStatusCode.MethodNotAllowed)}";
-
+                            
                             json = new StreamReader(request.InputStream).ReadToEnd();
                             Transaction trx = JsonConvert.DeserializeObject<Transaction>(json);
                             int blockId = chain.CreateTransaction(trx.Sender, trx.Recipient, trx.Amount);
-
-                            var s = chain.GetFullChain();
-                            System.Console.WriteLine(s);
-
-                            System.IO.File.WriteAllText("file.json", s);
-                            FindAndSave(chain);
+                           
+                            //var s = chain.GetFullChain();
+                           // System.Console.WriteLine(s);
+                           
+                            //System.IO.File.WriteAllText("file.json", s);
+                            //FindAndSave(chain);
                             return $"Your transaction will be included in block {blockId}";
 
                         //GET: http://localhost:12345/chain
@@ -150,7 +231,8 @@ namespace BlockChainDemo
                         case "/nodes/register":
                             if (request.HttpMethod != HttpMethod.Post.Method)
                                 return $"{new HttpResponseMessage(HttpStatusCode.MethodNotAllowed)}";
-
+                            //request.Headers.Add("Access-Control-Allow-Origin", "*");
+                            
                             json = new StreamReader(request.InputStream).ReadToEnd();
                             var urlList = new { Urls = new string[0] };
                             var obj = JsonConvert.DeserializeAnonymousType(json, urlList);
@@ -161,7 +243,8 @@ namespace BlockChainDemo
                             return chain.Consensus();
 
                         case "/tallenna":
-                            InsertToDatabase(chain).Wait();
+                            //InsertToDatabase(chain).Wait();
+                            FindAndSave(chain);
                             return "Tallennettiin tietokantaan";
 
                         case "/testi":
