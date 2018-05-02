@@ -120,6 +120,16 @@ function NewTransaction() {
 			},
 			dataType: "json",
 		});
+	}).done(function (){
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:8080/http://" + localIp + ":12345/testi",
+			
+			success: function (data) {
+				console.log(data);
+			},
+			
+		});
 	});
 
 
