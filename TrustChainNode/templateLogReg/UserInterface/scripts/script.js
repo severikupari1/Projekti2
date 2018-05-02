@@ -3,6 +3,11 @@ var currentPage = 'page-front';
 
 // Blockchain data is global, functions except Refresh should not change the data
 var chainData = '';
+var localIp = '';
+var sender = '';
+var receiver = '';
+var amount = '1';
+
 
 $( document ).ready(function() {
     $("#mine").click(function (){
@@ -63,8 +68,19 @@ function NewTransaction()
 	
 	var sender = $('#transaction-sender').val();
 	var receiver = $('#transaction-receiver').val();
-	var amount = $('#transaction-amount').val();
+
 	
+	
+	if(!isNaN($('#transaction-amount').val()))
+	{
+	   //do some thing if it's a number
+	   amount = $('#transaction-amount').val();
+	}else{
+	   //do some thing if it's NOT a number
+	   amount = '0';
+	}
+
+
 	var data =
 	{
 		"Amount":Number(amount),
@@ -73,18 +89,43 @@ function NewTransaction()
 	};
 	
 	var jsonstring = JSON.stringify(data);
-	
+	alert(jsonstring);
 	$.ajax({
-		crossorigin:true,
-		type: "POST",
-		url: "http://localhost:8080/http://10.211.48.117:12345/transactions/new",
-		data: jsonstring,
-		success: function(){
+		
+		type: "GET",
+		url: "http://localhost:3000/ip",
+		success: function(ip){
 			//$('#transaction-result').html("Transaktio tallennettu!");
 			//$('#transaction-result').html(data);
+			localIp = ip;
+		},
+		
+	}).done(function (){
+		console.log("DONE!");
+		$.ajax({		
+		type: "POST",
+		url: "http://localhost:8080/http://" + localIp +":12345/transactions/new",
+		data: jsonstring,
+		success: function(data){
+			console.log(data);
 		},
 		dataType: "json",
 	});
+	});
+
+
+
+	// $.ajax({
+	// 	crossorigin:true,
+	// 	type: "POST",
+	// 	url: "http://localhost:8080/http://10.211.48.117:12345/transactions/new",
+	// 	data: jsonstring,
+	// 	success: function(data){
+	// 		$('#transaction-result').html("Transaktio tallennettu!");
+	// 		$('#transaction-result').html(data);
+	// 	},
+	// 	dataType: "json",
+	// });
 
 	
 	
