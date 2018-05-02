@@ -98,7 +98,7 @@ function NewTransaction() {
 		};
 
 	var jsonstring = JSON.stringify(data);
-	alert(jsonstring);
+	//alert(jsonstring);
 	$.ajax({
 
 		type: "GET",
@@ -376,17 +376,36 @@ function Refresh() {
 	// 	dataType: "json",
 
 	// });
+	$.ajax({
 
+		type: "GET",
+		url: "http://localhost:3000/ip",
+		success: function (ip) {
+			//$('#transaction-result').html("Transaktio tallennettu!");
+			//$('#transaction-result').html(data);
+			localIp = ip;
+			//alert(localIp);
+			var urlichain = '';
+	 urlichain += "http://";
+	 urlichain += localIp;
+	 urlichain += ":12345/chain";
+	//alert(urlichain);
+		},
 
+	})
+
+	
+	console.log("ALKU");
 	$.ajax({
 		type: "GET",
-		url: "http://" + localIp + ":12345/chain",
-		data: jsonstring,
+		url: "http://localhost:3000/chain1",
+		
 		success: function (data) {
+			//alert(JSON.stringify(data));
 			console.log(data);
 			//console.log(data);
 			chainData = data.chain;
-			//console.log(chainData);
+			console.log(chainData);
 
 			// Generate table from blockchain data for chain view page
 			JsonToDataTable();
@@ -395,12 +414,13 @@ function Refresh() {
 			GenerateSearchSenderOptions();
 			GenerateSearchReceiverOptions();
 			GenerateSearchAmountOptions();
-
+			
 			// Reset search title
 			$("#search-title").html("Kaikki transaktiot:");
 		},
 		dataType: "json",
 	});
+	console.log("LOPPU");
 
 
 
