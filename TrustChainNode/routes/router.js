@@ -4,11 +4,25 @@ var router = express.Router();
 var User = require('../models/user');
 var path = require('path');
 
+var network = require('network');
+
+
+
+router.get('/ip', function (req, res, next) {
+  network.get_private_ip(function(err, ip) {
+    console.log(err || ip); // err may be 'No active network interface found'.
+    res.send(ip);
+  })
+});
+
+
 
 // GET route for reading data
 router.get('/', function (req, res, next) {
   return res.sendFile(path.join(__dirname + '/templateLogReg/index.html'));
 });
+
+
 
 
 //POST route for updating data
